@@ -1,5 +1,8 @@
 # Cloudinary Intro using PHP #
 
+https://cloudinary.com/documentation/sdks/php/Cloudinary/Cloudinary.html
+
+
 ### Mac
 Mac comes with PHP installed.
 To install the latest version of PHP use HomeBrew.  You can [install Homebrew](https://brew.sh/) 
@@ -51,15 +54,21 @@ Add Cloudinary Library:
 
 ```php
 require_once 'vendor/autoload.php';
+
+## not sure if the following do anything
+use \Cloudinary\Configuration\Configuration;
+use \Cloudinary\Transformation\Resize;
+use \Cloudinary\Transformation\Effect;
+use Cloudinary\Asset\DeliveryType;  //for fetch
 ```
 
 There are 2 ways you can make the credentials available.
 
 ```php
-Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'key' => 'API_KEY', 'secret' => 'API_SECRET']]);
+$cloudinary = new \Cloudinary\Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
+print_r($cloudinary->configuration);
+print_r($cloudinary->configuration->account->cloudName);
 ```
-
-or
 
 ```php
 $cloudinary = new Cloudinary(
@@ -73,6 +82,29 @@ $cloudinary = new Cloudinary(
 );
 ```
 
+
+```php
+// try instance
+// can't get instance to work
+use Cloudinary\Configuration\Configuration;
+\Cloudinary\Configuration\Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'key' => 'API_KEY', 'secret' => 'API_SECRET']]);
+
+// $cld_config = new \Cloudinary\Configuration\Configuration;
+// require_once('Cloudinary\Configuration\Configuration');
+
+
+
+\Cloudinary\Configuration\Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'key' => 'API_KEY', 'secret' => 'API_SECRET']]);
+
+
+```
+
+
+
+
+
+
+
 ## Exercises
 You will see that the images and video to be used in the exercises are in the `assets` directory.
 And we will be using `echo` or `print_r` to display the return value or array.
@@ -83,53 +115,66 @@ And we will be using `echo` or `print_r` to display the return value or array.
 Upload an image and supply a public id of 20 random characters
 
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/cheesecake.jpg'));
+#alias the upload API
+$uploader = $cloudinary->uploadApi();
+#alias the admin API
+$api = $cloudinary->adminApi();
+```
+
+
+```php
+# alias the upload API
+
+print_r($uploader->upload('./assets/cheesecake.jpg'));
+#or
+print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg'));
+
 ```
 
 ### video
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/video.mp4',['resource_type'=>'video']));
+print_r($cloudinary->uploadApi()->upload('./assets/video.mp4',['resource_type'=>'video']));
 ```
 
 ### raw
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']));
+print_r($cloudinary->uploadApi()->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']));
 ```
 
 ### auto
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/video.mp4',['resource_type'=>'auto']));
+print_r($cloudinary->uploadApi()->upload('./assets/video.mp4',['resource_type'=>'auto']));
 ```
 
 ### upload options
 #### Assign public_id
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/face.jpg',['public_id'=>'face']));
+print_r($cloudinary->uploadApi()->upload('./assets/face.jpg',['public_id'=>'face']));
 ```
 
 #### Use filename, unique
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]));
+print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]));
 ```
 
 #### Use filename, not unique
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>false]));
+print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>false]));
 ```
 
 #### Specify folder name
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']));
+print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']));
 ```
 
 #### Let Cloudinary create folder on the fly from public id
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']));
+print_r($cloudinary->uploadApi()->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']));
 ```
 
 ### Remote asset upload from remote (https)
 ```php
-print_r(\Cloudinary\Uploader::upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'));
+print_r($cloudinary->uploadApi()->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'));
 ```
 
 ## Preset
@@ -141,23 +186,33 @@ You can use this for front end widgets and API calls.  You don't need to hide se
 
 #### Create a new Admin API object:
 ```php
-$api = new \Cloudinary\Api();
+$api = $cloudinary->adminApi();
+
 ```
 
 #### Create Un-Signed Preset
 We're adding a tag and limiting formats that can be uploaded.
 ```php
-print_r($api->create_upload_preset([
+
+print_r($api->createUploadPreset([
     'name'              => 'unsigned-name',
     'unsigned'          => true,
     'tags'              => 'unsigned',
     'allowed_formats'   => 'jpg,png',
 ]));
+// print_r($api->create_upload_preset([
+//     'name'              => 'unsigned-name',
+//     'unsigned'          => true,
+//     'tags'              => 'unsigned',
+//     'allowed_formats'   => 'jpg,png',
+// ]));
 ```
 
 #### Use Un-Signed Preset in Upload
 ```php
-print_r(\Cloudinary\Uploader::unsigned_upload('./assets/logo.png','unsigned-name'));
+print_r($cloudinary->uploadApi()->unsignedUpload('./assets/logo.png','unsigned-name'));
+
+// print_r(\Cloudinary\Uploader::unsigned_upload('./assets/logo.png','unsigned-name'));
 ```
 
 ### Signed Preset
@@ -167,7 +222,7 @@ Use the signed preset for backend scripts with access to API_SECRET credentials.
 #### Create Signed Preset
 We're adding a tag and limiting formats that can be uploaded.
 ```php
-print_r($api->create_upload_preset([
+print_r($api->createUploadPreset([
     'name'              => 'signed-name',
     'unsigned'          => false,
     'tags'              => 'signed',
@@ -177,7 +232,9 @@ print_r($api->create_upload_preset([
 
 #### Use Signed Preset 
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/lake.jpg',['upload_preset'=>'signed-name']));
+print_r($cloudinary->uploadApi()->upload('./assets/lake.jpg',['upload_preset'=>'signed-name']));
+
+// print_r(\Cloudinary\Uploader::upload('./assets/lake.jpg',['upload_preset'=>'signed-name']));
 ```
 
 ## Auto-upload and Fetch
@@ -190,6 +247,10 @@ Instead of using API calls to upload and cache assets, we'll create URLs and the
 Fetch lets you load an asset by specifying the remote URL with a "fetch" delivery type.  When using the Upload API we were using the "upload" delivery type and we didn't specify it because it was the default.  You saw the term `upload` in the URLs in the Upload API response.  In order to use fetch, we'll specify "fetch" when we create a URL.
 
 ```php 
+echo $cloudinary->image(…)->deliveryType(DeliveryType::FETCH)
+ 
+echo $cloudinary->image('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg')->deliveryType(\Cloudinary\Asset\DeliveryType::FETCH);
+
 echo cloudinary_url('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg',['type'=>'fetch']);
 ```
 
@@ -203,18 +264,33 @@ We use the URL helper in the Ruby SDK to create a URL.
 #### Auto-upload Video
 
 ```php
-echo cloudinary_url('remote-media/video/snowboarding',['resource_type'=>'video','transformation'=>['width'=>300,'crop'=>'scale']]);
+# 1st param is width 2nd height
+echo $cloudinary->video('remote-media/video/snowboarding')->scale(300);
+echo $cloudinary->image('cheesecake')->scale(300);
+
+# using resize and effect
+use \Cloudinary\Transformation\Resize;
+use \Cloudinary\Transformation\Effect;
+print_r($cloudinary->image('cheesecake') -> resize(\Cloudinary\Transformation\Resize::scale(200, 200))->effect(\Cloudinary\Transformation\Effect::sepia()));
+
+echo $cloudinary->image('cheesecake') 
+-> resize(\Cloudinary\Transformation\Resize::scale()->height(200))
+-> effect(\Cloudinary\Transformation\Effect::sepia())->toUrl();
+
+// echo cloudinary_url('remote-media/video/snowboarding',['resource_type'=>'video','transformation'=>['width'=>300,'crop'=>'scale']]);
 ```
 
 #### Auto-upload Image
 
 ```php
+
 echo cloudinary_url('remote-media/images/dolphin',['transformation'=>['width'=>300,'crop'=>'scale']]);
 ```
 
 #### Auto-upload Raw
 
 ```php
+echo $cloudinary->raw('remote-media/raw/data.json');
 echo cloudinary_url('remote-media/raw/data.json',['resource_type'=>'raw']);
 ```
 
