@@ -11,8 +11,6 @@ To install the latest version of PHP use HomeBrew.  You can [install Homebrew](h
 brew install php
 php --version
 ```
-
-
 ### Windows
 
 https://windows.php.net/
@@ -20,18 +18,16 @@ https://windows.php.net/
 ## Install Composer
 
 ```bash
-curl -s https://getcomposer.org/installer | php
-sudo mv ./composer.phar /usr/local/bin/composer
-composer --version
+curl -s https://getcomposer.org/installer | php sudo mv ./composer.phar /usr/local/bin/composer composer --version
 ```
 
 ## Setup to run scripts
 
-1. Install Cloudinary via composer
+Install Cloudinary via composer
 
 ```bash
-composer require cloudinary/cloudinary_php:2.0.0-beta7
-```
+composer require cloudinary/cloudinary_php
+ ```
 This will create a `composer.json` and `composer.lock`.  For example:
 
 ```js
@@ -40,7 +36,6 @@ This will create a `composer.json` and `composer.lock`.  For example:
         "cloudinary/cloudinary_php": "2.0.0-beta7"
     }
 }
-
 ```
 
 To enter PHP CLI:
@@ -247,11 +242,13 @@ Instead of using API calls to upload and cache assets, we'll create URLs and the
 Fetch lets you load an asset by specifying the remote URL with a "fetch" delivery type.  When using the Upload API we were using the "upload" delivery type and we didn't specify it because it was the default.  You saw the term `upload` in the URLs in the Upload API response.  In order to use fetch, we'll specify "fetch" when we create a URL.
 
 ```php 
-echo $cloudinary->image(…)->deliveryType(DeliveryType::FETCH)
+// pattern
+// echo $cloudinary->image(…)->deliveryType(DeliveryType::FETCH)
  
 echo $cloudinary->image('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg')->deliveryType(\Cloudinary\Asset\DeliveryType::FETCH);
 
-echo cloudinary_url('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg',['type'=>'fetch']);
+//old way
+// echo cloudinary_url('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg',['type'=>'fetch']);
 ```
 
 ### Auto-upload

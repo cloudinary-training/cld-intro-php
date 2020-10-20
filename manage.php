@@ -8,7 +8,7 @@ use Cloudinary\Cloudinary;
 
 
 // Constructor
-$cloudinary = new \Cloudinary\Cloudinary('cloudinary://892275429346483:TqPTlL652atsfH4CWGv8ot7PAdg@sep-2020-test');
+$cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 // print_r($cloudinary->configuration->account->cloudName);
 // echo "\n";
 
