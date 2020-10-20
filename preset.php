@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * This file is part of the Cloudinary PHP package.
+ *
+ * (c) Cloudinary
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+// namespace Cloudinary\Samples;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+
+use Cloudinary\Cloudinary;
+
+// Config
+
+// Constructor
+// $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
+$cloudinary = new \Cloudinary\Cloudinary('cloudinary://892275429346483:TqPTlL652atsfH4CWGv8ot7PAdg@sep-2020-test');
+// print_r($cloudinary->configuration->account->cloudName);
+// echo "\n";
+
+// Preset
+
+# Alias the upload API
+$uploader = $cloudinary->uploadApi();
+# Alias the admin API
+$api = $cloudinary->adminApi();
+
+// Unsigned Preset
+
+// print_r($api->createUploadPreset([
+//   'name'              => 'unsigned-name',
+//   'unsigned'          => true,
+//   'tags'              => 'unsigned',
+//   'allowed_formats'   => 'jpg,png',
+// ]));
+// echo "\n";
+
+// Use unsigned preset in upload
+
+// print_r($uploader->upload('./assets/logo.png',['upload_preset'=>'unsigned-name']));
+// echo "\n";
+
+// Create signed preset
+
+// print_r($api->createUploadPreset([
+//   'name'              => 'signed-name',
+//   'unsigned'          => false,
+//   'tags'              => 'signed',
+//   'allowed_formats'   => 'jpg,png',
+// ]));
+// echo "\n";
+
+// Use signed preset in upload (you can use this in DAM upload)
+
+// print_r($uploader->upload('./assets/lake.jpg',['upload_preset'=>'signed-name']));
+// echo "\n";
