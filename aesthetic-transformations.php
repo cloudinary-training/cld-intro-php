@@ -22,9 +22,14 @@ use Cloudinary\Transformation\ArtisticFilter;
 // use Cloudinary\Media;
 use Cloudinary\Transformation\Adjust;
 use Cloudinary\Tag\ImageTag;
+use Cloudinary\Transformation\Argument\Text\FontWeight;
 use Cloudinary\Transformation\Cartoonify;
 
-use function Cloudinary\Samples\groupToString;
+
+use Cloudinary\Transformation\Overlay;
+use Cloudinary\Transformation\Source;
+use Cloudinary\Transformation\Position;
+use Cloudinary\Transformation\LayerSource;
 
 # Config
 
@@ -36,6 +41,7 @@ use function Cloudinary\Samples\groupToString;
 # Constructor
 
 # $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
+
 print_r($cloudinary->configuration->account->cloudName);
 
 echo "\n";
@@ -143,24 +149,83 @@ echo "\n";
 
 # Overlays
 
-#Text over image
+# Text over image
+
+// echo ($cloudinary->image('faces')
+//   ->resize(Resize::thumbnail(300,300,Gravity::faces()))
+//   ->overlay(
+//     Source::text('Tutoring')
+//       ->fontFamily('Arial')
+//       ->fontSize(30)
+//       ->fontWeight(FontWeight::BOLD) //weight is optional
+//       ->effect(Effect::colorize()->color(Color::YELLOW))
+//       ->effect(Effect::outline(5) -> color(Color::ORANGE)
+//       //// ->background(Color::WHITE)//how to add background to text?
+//   ),
+//     Position::northWest()->x(10)->y(10)
+//   )
+//   ->roundCorners(30)
+//   ->format(Format::auto()) . "\n");
+
+# Image over text
+
+// echo ($cloudinary->image('working')
+//   ->resize(Resize::scale(400))
+//   ->overlay(
+//     Source::image('logo')
+//       ->resize(Resize::thumbnail(50, 50))
+//       ->adjust(Adjust::opacity(30))
+//     ,
+//     Position::northEast()->x(10)->y(10)
+//   )
+// ). "\n";
 
 
-# Image over video
 
 # Text over video
 
+// echo ($cloudinary->video('video')
+//   ->resize(Resize::scale(300))
+//   ->overlay(
+//     Source::text('Earth')
+//       ->fontFamily('Arial')
+//       ->fontSize(30)
+//       ->fontWeight(FontWeight::BOLD) //weight is optional
+//       ->effect(Effect::colorize()->color(Color::BLUE))
+//       ->effect(Effect::outline(5) -> color(Color::GREEN))
+//       //// ->background(Color::WHITE)//how to add background to text?
+//     ,
+    
+//     Position::northWest()->x(10)->y(10)
+//   )
+// ). "\n";
+
+# Image over Video
+
+
+// echo ($cloudinary->video('video')
+//   ->resize(Resize::scale(400))
+//   ->overlay(
+//     Source::image('logo')
+//       ->resize(Resize::thumbnail(50, 50))
+//       ->adjust(Adjust::opacity(30))
+//     ,
+//     Position::northEast()->x(10)->y(10)
+//   )
+// ). "\n";
+
+
 
 # migration example not working
-print_r(ImageTag::fromParams("lake", 
-array("transformation"=>array(
-// Media::fromParams("lake", array("transformation"=>array(
-  array("effect"=>"cartoonify"),
-  array("radius"=>"max"),
-  array("effect"=>"outline:100", "color"=>"lightblue"),
-  array("background"=>"lightblue"),
-  array("height"=>300, "crop"=>"scale")
-  ))));
+// print_r(ImageTag::fromParams("lake", 
+// array("transformation"=>array(
+// // Media::fromParams("lake", array("transformation"=>array(
+//   array("effect"=>"cartoonify"),
+//   array("radius"=>"max"),
+//   array("effect"=>"outline:100", "color"=>"lightblue"),
+//   array("background"=>"lightblue"),
+//   array("height"=>300, "crop"=>"scale")
+//   ))));
   
 
 
