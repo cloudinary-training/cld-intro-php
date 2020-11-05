@@ -7,11 +7,16 @@ use Cloudinary\Configuration\Configuration;
 use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Asset\Media;
 use Cloudinary\Api\Admin\AdminApi;
+use Cloudinary\Tag\ImageTag;
+use Cloudinary\Tag\VideoThumbnailTag;
+use Cloudinary\Tag\VideoTag;
+
 
 // Config
 
 // Singleton - can't use for aliasing
-$cloudinary = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
+// $cloudinary = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
+$config = Configuration::instance(['account' => ['cloud_name' => 'sep-2020-test', 'api_key' => '892275429346483', 'api_secret' => 'TqPTlL652atsfH4CWGv8ot7PAdg']]);
 
 // use variable reference
 $upload = new UploadApi();
@@ -50,7 +55,39 @@ echo (Media::fromParams("lake",
     ["background"=>"lightblue"],
     ["height"=>300, "crop"=>"scale"]
   ]
-])->toUrl()). "\n";
+]) . "\n");
+
+echo (ImageTag::fromParams("lake", 
+["transformation"=>
+  [
+    ["effect"=>"cartoonify"],
+    ["radius"=>"max"],
+    ["background"=>"lightblue"],
+    ["height"=>300, "crop"=>"scale"]
+  ]
+]) . "\n");
+
+echo (VideoThumbnailTag::fromParams("video.jpg", 
+  [
+    "start_offset"=>"1", 
+    "width"=>350, 
+    "height"=>350,
+    "border"=>"5px_solid_white", 
+    "crop"=>"thumb", 
+    "resource_type"=>"video"
+  ]
+) . "\n");
+
+echo (VideoTag::fromParams("video.jpg", 
+  [
+    "start_offset"=>"1", 
+    "width"=>350, 
+    "height"=>350,
+    "border"=>"5px_solid_white", 
+    "crop"=>"thumb", 
+    "resource_type"=>"video"
+  ]
+) . "\n");
 
 // compare to php sdk1
 
