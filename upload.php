@@ -4,16 +4,10 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
-use Cloudinary\Configuration\Configuration;
 
 
-// Config
-
-
-// Constructor
+// Config with Constructor
 $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
-
-
 print_r($cloudinary->configuration->account->cloudName);
 echo "\n";
 
