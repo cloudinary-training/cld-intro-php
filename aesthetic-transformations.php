@@ -19,7 +19,6 @@ use Cloudinary\Transformation\Argument\Color;
 use Cloudinary\Transformation\Effect;
 use Cloudinary\Transformation\Improve;
 use Cloudinary\Transformation\ArtisticFilter;
-// use Cloudinary\Media;
 use Cloudinary\Transformation\Adjust;
 use Cloudinary\Tag\ImageTag;
 use Cloudinary\Transformation\Argument\Text\FontWeight;
@@ -35,14 +34,14 @@ use Cloudinary\Transformation\LayerSource;
 
 # Singleton - can't use for aliasing
 # $cloudinary = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
-
+Configuration::instance(['account' => ['cloud_name' => 'sep-2020-test', 'api_key' => '892275429346483', 'api_secret' => 'TqPTlL652atsfH4CWGv8ot7PAdg']]);
 // print_r($cloudinary);
 
 # Constructor
 
 # $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 
-print_r($cloudinary->configuration->account->cloudName);
+// print_r($cloudinary->configuration->account->cloudName);
 
 echo "\n";
 
@@ -216,18 +215,16 @@ echo "\n";
 
 
 
-# migration example not working
-// print_r(ImageTag::fromParams("lake", 
-// array("transformation"=>array(
-// // Media::fromParams("lake", array("transformation"=>array(
-//   array("effect"=>"cartoonify"),
-//   array("radius"=>"max"),
-//   array("effect"=>"outline:100", "color"=>"lightblue"),
-//   array("background"=>"lightblue"),
-//   array("height"=>300, "crop"=>"scale")
-//   ))));
-  
 
+$cloudinary = new Cloudinary('cloudinary://892275429346483:TqPTlL652atsfH4CWGv8ot7PAdg@sep-2020-test');
+
+echo $cloudinary->image('face') 
+-> effect(Effect::cartoonify())
+-> roundCorners(CornerRadius::max())
+-> effect(Effect::outline(100) -> color(Color::orange()))
+-> background(Color::lightblue())
+-> resize(Resize::scale() -> height(300))
+->toUrl() . "\n";
 
 
 

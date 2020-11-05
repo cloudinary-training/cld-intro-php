@@ -9,17 +9,16 @@ use Cloudinary\Configuration\Configuration;
 
 // Config
 
-// Singleton - can't use for aliasing
-// $cloudinary = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
-// print_r($cloudinary);
 
 // Constructor
-// $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
-
 $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
+
+
 print_r($cloudinary->configuration->account->cloudName);
 echo "\n";
 
+
+use Cloudinary\Api\Upload\UploadApi;
 # Alias the upload API
 $uploader = $cloudinary->uploadApi();
 #alias the admin API
@@ -30,7 +29,7 @@ $api = $cloudinary->adminApi();
 
 // Upload an image and supply a public id of 20 random characters
 // image is the default
-// print_r($uploader->upload('./assets/cheesecake.jpg'));
+print_r($uploader->upload('./assets/cheesecake.jpg'));
 
 // Video
 // print_r($uploader->upload('./assets/video.mp4',['resource_type'=>'video']));

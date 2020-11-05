@@ -114,7 +114,7 @@
 //                     '(new Transformation())->resize(Crop::thumbnail(200, 200))',
 //                 ],
 //                 [
-//                     (new Transformation())->resize(Crop::thumbnail(200, 200, Gravity::auto())),
+//                     (new Transformation())->resize(Crop::thumbnail(200, 200, ::autGravityo())),
 //                     '(new Transformation())->resize(Crop::thumbnail(200, 200, Gravity::auto()))',
 //                 ],
 //                 [
