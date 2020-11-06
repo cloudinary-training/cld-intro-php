@@ -214,17 +214,13 @@ echo "\n";
 // ). "\n";
 
 
-
-
-$cloudinary = new Cloudinary('cloudinary://892275429346483:TqPTlL652atsfH4CWGv8ot7PAdg@sep-2020-test');
-
-echo $cloudinary->image('face') 
--> effect(Effect::cartoonify())
--> roundCorners(CornerRadius::max())
--> effect(Effect::outline(100) -> color(Color::orange()))
--> background(Color::lightblue())
--> resize(Resize::scale() -> height(300))
-->toUrl() . "\n";
+// echo $cloudinary->image('face') 
+// -> effect(Effect::cartoonify())
+// -> roundCorners(CornerRadius::max())
+// -> effect(Effect::outline(100) -> color(Color::orange()))
+// -> background(Color::lightblue())
+// -> resize(Resize::scale() -> height(300))
+// ->toUrl() . "\n";
 
 
 

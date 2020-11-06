@@ -56,25 +56,25 @@ $api = $cloudinary->adminApi();
 // print_r($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'));
 
 # Use named transformation
-
-// echo $cloudinary->image('cheesecake')
-// ->namedTransformation('standard') 
-// ->toUrl() . "\n";
+echo $cloudinary->image('cheesecake')
+->namedTransformation('standard') 
+->toUrl() . "\n";
 
 # using named transform with f_auto: chain
-// echo $cloudinary->image('cheesecake')
-// ->namedTransformation('standard') 
-// ->format(Format::auto())
-// ->toUrl() . "\n";
+echo $cloudinary->image('cheesecake')
+->namedTransformation('standard') 
+->format(Format::auto())
+->toUrl() . "\n";
 
-# a complex chained transformation
-echo $cloudinary->image('demo/shirt_only.png')
-->adjust(Adjust::opacity(0))
+
+# here's a complex transformation
+echo $cloudinary->image('shirt_only.png')
   ->overlay(
-    Source::image('demo:cloudinary_logo')
-      ->resize(Resize::scale(324))
-      ->adjust(Adjust::brightness(-21)),
-    Position::center()->x(-5)->y(-200)  
+    Source::image('logo')
+      ->resize(Resize::scale(300))
+      ->adjust(Adjust::brightness(-21))
+      ->roundCorners(CornerRadius::max()),
+    Position::center()->x(-10)->y(-200)  
   )
   ->overlay(
     Source::text('Hello Jon')
@@ -85,28 +85,18 @@ echo $cloudinary->image('demo/shirt_only.png')
       ->adjust(Adjust::opacity(70))
       ->effect(Effect::colorize()->color(Color::rgb('#999999'))
   ),
-    Position::center()->y(0),
-  )
-  ->overlay(
-    Source::image('demo:shirt_displace'),
-      //  ->effect(Effect::displace),
-    // Position::center()->x(10)->y(10)  
-  )
-  ->overlay(
-    Source::image('demo:shirt_only')
-      ->effect(Effect::colorize()->color(Color::RED,-50))
-  )
-  ->underlay(
-    Source::image('demo:model2')
-  )
-  ->overlay(
-    Source::image('demo:heather_texture')
-      ->adjust(Adjust::opacity(29))
-  ) 
-->format(Format::auto())
+    Position::center()->x(-10),
+   ) 
 ->toUrl() . "\n";
 
+# create a named transformation for the complex transformation
+// print_r($api->createTransformation('tshirt','l_logo/c_scale,w_300/e_brightness:-21/r_max/fl_layer_apply,g_center,x_-10,y_-200/l_text:Coustard_100_bold:Hello Jon/c_scale,w_365/o_70/co_rgb:999999,e_colorize/fl_layer_apply,g_center,x_-10/f_auto'));
 
+# using named transform with f_auto: chain
+echo $cloudinary->image('shirt_only.png')
+->namedTransformation('tshirt') 
+->format(Format::auto())
+->toUrl() . "\n";
 
 
 

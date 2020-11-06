@@ -399,8 +399,8 @@ print_r(\Cloudinary\Uploader::upload('./assets/video.mp4',['public_id'=>'video',
 print_r(\Cloudinary\Uploader::upload('./assets/demo-cloudinary-logo.png',['public_id'=>'demo/cloudinary_logo']));
 print_r(\Cloudinary\Uploader::upload('./assets/heather_texture.png',['public_id'=>'demo/heather_texture']));
 print_r(\Cloudinary\Uploader::upload('./assets/model2.png',['public_id'=>'demo/model2']));
-print_r(\Cloudinary\Uploader::upload('./assets/shirt_only.png',['public_id'=>'demo/shirt_only']));
-print_r(\Cloudinary\Uploader::upload('./assets/shirt_only.png',['public_id'=>'demo/shirt_displace']));
+print_r(\Cloudinary\Uploader::upload('./assets/shirt_only.png',['public_id'=>'shirt_only']));
+
 print_r(\Cloudinary\Uploader::upload('https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg',['public_id'=>'cookies']));
 print_r(\Cloudinary\Uploader::upload('./assets/working.jpg',['public_id'=>'working']));
 ```
@@ -852,5 +852,5 @@ print_r($api->create_transformation('complex', [
 We can add `f_auto` to it.
 
 ```php
-echo cloudinary_url('demo/shirt_only.png',['transformation'=>['transformation'=>'complex','fetch_format'=>'auto']]);
+echo cloudinary_url('shirt_only.png',['transformation'=>['transformation'=>'complex','fetch_format'=>'auto']]);
 ```
