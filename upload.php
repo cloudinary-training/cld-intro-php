@@ -5,25 +5,19 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
 
-
 // Config with Constructor
 $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 print_r($cloudinary->configuration->account->cloudName);
 echo "\n";
 
-
-use Cloudinary\Api\Upload\UploadApi;
 # Alias the upload API
 $uploader = $cloudinary->uploadApi();
-#alias the admin API
-$api = $cloudinary->adminApi();
-
 
 # Upload
 
 // Upload an image and supply a public id of 20 random characters
 // image is the default
-print_r($uploader->upload('./assets/cheesecake.jpg'));
+// print_r($uploader->upload('./assets/cheesecake.jpg'));
 
 // Video
 // print_r($uploader->upload('./assets/video.mp4',['resource_type'=>'video']));
@@ -54,8 +48,8 @@ print_r($uploader->upload('./assets/cheesecake.jpg'));
 // echo "\n";
 
 // Let Cloudinary create folder on the fly from public id
-print_r($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']));
-echo "\n";
+// print_r($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']));
+// echo "\n";
 
 // Remote asset upload from remote (https)
 // print_r($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'));

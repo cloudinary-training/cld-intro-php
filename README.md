@@ -49,17 +49,11 @@ Add Cloudinary Library:
 
 ```php
 require_once 'vendor/autoload.php';
-
-## not sure if the following do anything
-use \Cloudinary\Configuration\Configuration;
-use \Cloudinary\Transformation\Resize;
-use \Cloudinary\Transformation\Effect;
-use Cloudinary\Asset\DeliveryType;  //for fetch
 ```
 
 There are 2 ways you can make the credentials available.  
 
-## Constructor
+## Constructor 
 
 Use this for new PHP SDK2 code to create an instance of the Cloudinary object:
 
@@ -71,7 +65,6 @@ print_r($cloudinary->configuration->account->cloudName);
 
 or  
 
-```
 ```php
 $cloudinary = new Cloudinary(
     [
@@ -84,28 +77,15 @@ $cloudinary = new Cloudinary(
 );
 ```
 
-
-
-
-
 ### Singleton  
 
-Use this for migrating code to PHP SDK2 to create a singleton that allows functionality similar to SDK1.  See migration documentation and training.
+Use this for migrating code to PHP SDK2 to create a singleton that allows functionality similar to SDK1.  
 
 ```php
 // only for migration
 use Cloudinary\Configuration\Configuration;
-\Cloudinary\Configuration\Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'key' => 'API_KEY', 'secret' => 'API_SECRET']]);
-
-
-
+Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'key' => 'API_KEY', 'secret' => 'API_SECRET']]);
 ```
-
-
-
-
-
-
 
 ## Exercises
 You will see that the images and video to be used in the exercises are in the `assets` directory.
@@ -113,70 +93,70 @@ And we will be using `echo` or `print_r` to display the return value or array.
 
 ## Upload
 
+### Classes to import for the exercise
+
+```php
+use Cloudinary\Cloudinary;
+```
+
+### Upload API
+
+```php
+#reference the upload API
+$uploader = $cloudinary->uploadApi();
+```
+
 ### default
 Upload an image and supply a public id of 20 random characters
 
 ```php
-#alias the upload API
-$uploader = $cloudinary->uploadApi();
-#alias the admin API
-$api = $cloudinary->adminApi();
-```
-
-
-```php
-# alias the upload API
-
 print_r($uploader->upload('./assets/cheesecake.jpg'));
-#or
-print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg'));
-
 ```
 
 ### video
 ```php
-print_r($cloudinary->uploadApi()->upload('./assets/video.mp4',['resource_type'=>'video']));
+print_r($uploader->upload('./assets/video.mp4',['resource_type'=>'video']));
 ```
 
 ### raw
 ```php
-print_r($cloudinary->uploadApi()->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']));
+print_r($uploader->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']));
 ```
 
 ### auto
 ```php
-print_r($cloudinary->uploadApi()->upload('./assets/video.mp4',['resource_type'=>'auto']));
+print_r($uploader->upload('./assets/video.mp4',['resource_type'=>'auto']));
 ```
 
 ### upload options
 #### Assign public_id
 ```php
-print_r($cloudinary->uploadApi()->upload('./assets/face.jpg',['public_id'=>'face']));
+print_r($uploader->upload('./assets/face.jpg',['public_id'=>'face']));
 ```
 
 #### Use filename, unique
 ```php
-print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]));
+print_r($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]));
 ```
 
-#### Use filename, not unique
+### Use filename, not unique
 ```php
 print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>false]));
 ```
 
-#### Specify folder name
+### Specify folder name
 ```php
-print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']));
+print_r($uploader->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']));
 ```
 
-#### Let Cloudinary create folder on the fly from public id
+### Let Cloudinary create folder on the fly from public id
 ```php
-print_r($cloudinary->uploadApi()->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']));
+print_r($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']));
 ```
 
 ### Remote asset upload from remote (https)
 ```php
-print_r($cloudinary->uploadApi()->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'));
+print_r($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'));
 ```
 
 ## Preset
@@ -186,46 +166,46 @@ You can create these manually in the DAM or using script.
 ### Unsigned Preset
 You can use this for front end widgets and API calls.  You don't need to hide secrets.  You would usually use this in an app hosted on a secured web page.  It can't be used to upload in Media Library. Before you can use unsigned presets you need to click on a link in setting in the DAM.
 
-#### Create a new Admin API object:
+### Create a new Upload and Admin API references:
 ```php
+$uploader = $cloudinary->uploadApi();
 $api = $cloudinary->adminApi();
+```
 
+### Classes to import for the exercise
+
+```php
+use Cloudinary\Cloudinary;
 ```
 
 #### Create Un-Signed Preset
 We're adding a tag and limiting formats that can be uploaded.
-```php
 
+```php
 print_r($api->createUploadPreset([
-    'name'              => 'unsigned-name',
-    'unsigned'          => true,
-    'tags'              => 'unsigned',
-    'allowed_formats'   => 'jpg,png',
+  'name'              => 'unsigned-preset',
+  'unsigned'          => true,
+  'tags'              => 'unsigned',
+  'allowed_formats'   => 'jpg,png',
 ]));
-// print_r($api->create_upload_preset([
-//     'name'              => 'unsigned-name',
-//     'unsigned'          => true,
-//     'tags'              => 'unsigned',
-//     'allowed_formats'   => 'jpg,png',
-// ]));
 ```
 
 #### Use Un-Signed Preset in Upload
 ```php
-print_r($cloudinary->uploadApi()->unsignedUpload('./assets/logo.png','unsigned-name'));
-
-// print_r(\Cloudinary\Uploader::unsigned_upload('./assets/logo.png','unsigned-name'));
+print_r($uploader->upload('./assets/logo.png',['upload_preset'=>'unsigned-preset']));
 ```
 
 ### Signed Preset
 Use the signed preset for backend scripts with access to API_SECRET credentials.  If you want to use a preset in the DAM it must be signed.
 
+### Use the Preset in an HTML file (frontend)
+Add your cloud name and preset name to the index.html and use the upload widget with the unsigned preset.
 
 #### Create Signed Preset
 We're adding a tag and limiting formats that can be uploaded.
 ```php
 print_r($api->createUploadPreset([
-    'name'              => 'signed-name',
+    'name'              => 'signed-preset',
     'unsigned'          => false,
     'tags'              => 'signed',
     'allowed_formats'   => 'jpg,png',
@@ -233,10 +213,9 @@ print_r($api->createUploadPreset([
 ```
 
 #### Use Signed Preset 
-```php
-print_r($cloudinary->uploadApi()->upload('./assets/lake.jpg',['upload_preset'=>'signed-name']));
 
-// print_r(\Cloudinary\Uploader::upload('./assets/lake.jpg',['upload_preset'=>'signed-name']));
+```php
+print_r($uploader->upload('./assets/lake.jpg',['upload_preset'=>'signed-preset']));
 ```
 
 ## Auto-upload and Fetch
@@ -248,14 +227,19 @@ Instead of using API calls to upload and cache assets, we'll create URLs and the
 ### Fetch
 Fetch lets you load an asset by specifying the remote URL with a "fetch" delivery type.  When using the Upload API we were using the "upload" delivery type and we didn't specify it because it was the default.  You saw the term `upload` in the URLs in the Upload API response.  In order to use fetch, we'll specify "fetch" when we create a URL.
 
+## Classes to use in the exercise
+
+```php
+use Cloudinary\Cloudinary;
+use Cloudinary\Asset\DeliveryType;
+use Cloudinary\Transformation\Resize;
+
+```
+
 ```php 
 // pattern
-// echo $cloudinary->image(…)->deliveryType(DeliveryType::FETCH)
- 
-echo $cloudinary->image('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg')->deliveryType(\Cloudinary\Asset\DeliveryType::FETCH);
-
-//old way
-// echo cloudinary_url('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg',['type'=>'fetch']);
+echo $cloudinary->image('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg')
+  ->deliveryType(\Cloudinary\Asset\DeliveryType::FETCH) . "\n";
 ```
 
 ### Auto-upload
@@ -265,37 +249,23 @@ Fetch can only be used for images, but Auto upload can be used for all asset typ
 
 We use the URL helper in the Ruby SDK to create a URL.
 
-#### Auto-upload Video
+### Auto-upload Image with Cropping
 
 ```php
-# 1st param is width 2nd height
-echo $cloudinary->video('remote-media/video/snowboarding')->scale(300);
-echo $cloudinary->image('cheesecake')->scale(300);
+echo $cloudinary->image('remote-media/images/dolphin')
+  ->resize(Resize::scale()->width(300)) . "\n";
+```
+### Auto-upload Video with Cropping
 
-# using resize and effect
-use \Cloudinary\Transformation\Resize;
-use \Cloudinary\Transformation\Effect;
-print_r($cloudinary->image('cheesecake') -> resize(\Cloudinary\Transformation\Resize::scale(200, 200))->effect(\Cloudinary\Transformation\Effect::sepia()));
-
-echo $cloudinary->image('cheesecake') 
--> resize(\Cloudinary\Transformation\Resize::scale()->height(200))
--> effect(\Cloudinary\Transformation\Effect::sepia())->toUrl();
-
-// echo cloudinary_url('remote-media/video/snowboarding',['resource_type'=>'video','transformation'=>['width'=>300,'crop'=>'scale']]);
+```php
+echo $cloudinary->video('remote-media/video/snowboarding')
+  ->resize(Resize::scale()->width(300)) . "\n";
 ```
 
-#### Auto-upload Image
+### Auto-upload Raw
 
 ```php
-
-echo cloudinary_url('remote-media/images/dolphin',['transformation'=>['width'=>300,'crop'=>'scale']]);
-```
-
-#### Auto-upload Raw
-
-```php
-echo $cloudinary->raw('remote-media/raw/data.json');
-echo cloudinary_url('remote-media/raw/data.json',['resource_type'=>'raw']);
+echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
 ```
 
 ## Manage
@@ -730,20 +700,37 @@ echo cloudinary_url('video', [
 ## Named Transformations
 You can create a transformation template by using named transformations.  They cleanup your URLs to make them better for SEO.  If you want to hide your transformations or underlying assets used in overlays, named transformations can help.
 
+## Classes to import for the exercise
+
+```php
+use Cloudinary\Cloudinary;
+use Cloudinary\Transformation\Resize;
+use Cloudinary\Transformation\Format;
+use Cloudinary\Transformation\CornerRadius;
+use Cloudinary\Transformation\Argument\Color;
+use Cloudinary\Transformation\Effect;
+use Cloudinary\Transformation\Adjust;
+use Cloudinary\Transformation\Argument\Text\FontWeight;
+use Cloudinary\Transformation\Source;
+use Cloudinary\Transformation\Position;
+```
+
 ### Create a named transformation from a string
 
 ```php
 // Create a new Admin API object:
-$api = new \Cloudinary\Api();
+$api = $cloudinary->adminApi();
 
-print_r($api->create_transformation('standard','w_150,h_150,c_thumb,g_auto'));
+print_r($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'));
 ```
 
 ### Use named transformation
 Notice that the named you use to create the named transformation gets prefixed with a `t_` when you use it in URL.
 
 ```php
-echo cloudinary_url('cheesecake',['transformation'=>['transformation'=>'standard']]);
+echo $cloudinary->image('cheesecake')
+    ->namedTransformation('standard') 
+    ->toUrl();
 ```
 
 ### Use a named transformation with f_auto
@@ -753,7 +740,10 @@ You can't include `f_auto` in a named transformation because it is handled at th
 If the named transformation already exists you'll get an error letting your know.
 
 ```php
-echo cloudinary_url('cheesecake',['transformation'=>['transformation'=>'standard','fetch_format'=>'auto']]);
+ echo $cloudinary->image('cheesecake')
+    ->namedTransformation('standard') 
+    ->format(Format::auto())
+    ->toUrl();
 ```
 
 ### A super complex chained transformation
@@ -761,45 +751,26 @@ echo cloudinary_url('cheesecake',['transformation'=>['transformation'=>'standard
 #### The transformation
 
 ```php
-echo cloudinary_url('demo/shirt_only.png', [
-	'transformation'	=> [
-		[
-            'opacity'		=> 0,
-		],[
-            'overlay'       => 'demo:cloudinary_logo',
-            'effect'        => 'brightness:-21',
-            'x'             => -5,
-            'y'             => -200,
-            'width'         => 324,
-		],[
-            'overlay'       => [
-                'font_family'   => 'Coustard',
-                'font_size'     => 100,
-                'color'         => 'rgb:999999',
-                'font_weight'   => 'bold',
-                'text'          => 'Hello Jon',
-            ],
-            'opacity'       => 70,
-            'y'             => 0,
-            'width'         => 365,
-		],[
-            'overlay'       => 'demo:shirt_displace',
-            'effect'        => 'displace',
-            'x'             => 10,
-            'y'             => 10,
-		],[
-            'underlay'      => 'demo:shirt_only',
-            'effect'        => 'red:-50',
-		],[
-            'underlay'      => 'demo:model2',
-		],[
-            'overlay'       => 'demo:heather_texture',
-            'opacity'       => 29,
-		],[
-            'fetch_format'  => 'auto',
-		],
-	],
-]);
+echo $cloudinary->image('shirt_only.png')
+  ->overlay(
+    Source::image('logo')
+      ->resize(Resize::scale(300))
+      ->adjust(Adjust::brightness(-21))
+      ->roundCorners(CornerRadius::max()),
+    Position::center()->x(-10)->y(-200)  
+  )
+  ->overlay(
+    Source::text('Hello Jon')
+      ->fontFamily('Coustard')
+      ->fontSize(100)
+      ->fontWeight(FontWeight::BOLD) 
+      ->resize(Resize::scale(365))
+      ->adjust(Adjust::opacity(70))
+      ->effect(Effect::colorize()->color(Color::rgb('#999999'))
+  ),
+    Position::center()->x(-10),
+   ) 
+->toUrl() . "\n";
 ```
 
 #### make it a named transformation
@@ -809,48 +780,16 @@ Don't include `f_auto`
 // Create a new Admin API object if you haven't from the previous one:
 $api = new \Cloudinary\Api();
 
-print_r($api->create_transformation('complex', [
-	'transformation'	=> [
-		[
-            'opacity'		=> 0,
-		],[
-            'overlay'       => 'demo:cloudinary_logo',
-            'effect'        => 'brightness:-21',
-            'x'             => -5,
-            'y'             => -200,
-            'width'         => 324,
-		],[
-            'overlay'       => [
-                'font_family'   => 'Coustard',
-                'font_size'     => 100,
-                'color'         => 'rgb:999999',
-                'font_weight'   => 'bold',
-                'text'          => 'Hello Jon',
-            ],
-            'opacity'       => 70,
-            'y'             => 0,
-            'width'         => 365,
-		],[
-            'overlay'       => 'demo:shirt_displace',
-            'effect'        => 'displace',
-            'x'             => 10,
-            'y'             => 10,
-		],[
-            'underlay'      => 'demo:shirt_only',
-            'effect'        => 'red:-50',
-		],[
-            'underlay'      => 'demo:model2',
-		],[
-            'overlay'       => 'demo:heather_texture',
-            'opacity'       => 29,
-		],
-	],
-]));
+print_r($api->createTransformation('tshirt','l_logo/c_scale,w_300/e_brightness:-21/r_max/fl_layer_apply,g_center,x_-10,y_-200/l_text:Coustard_100_bold:Hello Jon/c_scale,w_365/o_70/co_rgb:999999,e_colorize/fl_layer_apply,g_center,x_-10/f_auto'));
+
 ```
 
 ### The complex transformation is now easier to use
 We can add `f_auto` to it.
 
 ```php
-echo cloudinary_url('shirt_only.png',['transformation'=>['transformation'=>'complex','fetch_format'=>'auto']]);
+echo $cloudinary->image('shirt_only.png')
+->namedTransformation('tshirt') 
+->format(Format::auto())
+->toUrl() 
 ```

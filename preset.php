@@ -1,14 +1,9 @@
 <?php
-
-
-
 require_once __DIR__ . '/vendor/autoload.php';
-
 
 use Cloudinary\Cloudinary;
 
 // Config
-
 // Constructor
 $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 // print_r($cloudinary->configuration->account->cloudName);
@@ -33,7 +28,7 @@ $api = $cloudinary->adminApi();
 
 // Use unsigned preset in upload
 
-// print_r($uploader->upload('./assets/logo.png',['upload_preset'=>'unsigned-name']));
+// print_r($uploader->upload('./assets/logo.png',['upload_preset'=>'unsigned-preset']));
 // echo "\n";
 
 // Create signed preset
@@ -47,6 +42,5 @@ $api = $cloudinary->adminApi();
 // echo "\n";
 
 // Use signed preset in upload (you can use this in DAM upload)
-
-// print_r($uploader->upload('./assets/lake.jpg',['upload_preset'=>'signed-name']));
+// print_r($uploader->upload('./assets/lake.jpg',['upload_preset'=>'signed-preset']));
 // echo "\n";

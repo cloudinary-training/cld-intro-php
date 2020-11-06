@@ -1,6 +1,4 @@
 <?php
-
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
@@ -30,4 +28,4 @@ $uploader = $cloudinary->uploadApi();
 //   ->resize(Resize::scale()->width(300)) . "\n";
 
 // Auto-upload Raw no transformations on raw
-echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
+// echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
