@@ -555,155 +555,132 @@ echo cloudinary_url('lake',[
 ## Aesthetic Transformations
 Use aesthetic options to achieve results and styling similar to what you find with CSS or Photoshop.
 
+### Classes to use in exercise
+
+```php
+use Cloudinary\Cloudinary;
+use Cloudinary\Asset\Video;
+use Cloudinary\Transformation\Resize;
+use Cloudinary\Transformation\Gravity;
+use Cloudinary\Transformation\Quality;
+use Cloudinary\Transformation\Format;
+use Cloudinary\Transformation\CornerRadius;
+use Cloudinary\Transformation\Border;
+use Cloudinary\Transformation\Background;
+use Cloudinary\Transformation\Argument\Color;
+use Cloudinary\Transformation\Effect;
+use Cloudinary\Transformation\Improve;
+use Cloudinary\Transformation\ArtisticFilter;
+use Cloudinary\Transformation\Adjust;
+use Cloudinary\Transformation\Argument\Text\FontWeight;
+use Cloudinary\Transformation\Cartoonify;
+use Cloudinary\Transformation\Overlay;
+use Cloudinary\Transformation\Source;
+use Cloudinary\Transformation\Position;
+```
+
 ### radius
 Similar to CSS radius.  The `radius: max` will generate a circle for a 1:1 aspect ratio.
 ```php
 // radius rounded corners and transparent background
-echo cloudinary_url('dog', [
-    'transformation' => [
-        'width'         => 300,
-        'height'        => 300,
-        'crop'          => 'thumb',
-        'gravity'       => 'auto',
-        'fetch_format'  => 'png',
-        'quality'       => 'auto',
-        'radius'        => 'max',
-    ],
-]);
+echo ($cloudinary->image('dog')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->roundCorners(CornerRadius::max())
+  ->format(Format::png())
+  ->quality(Quality::auto()) . "\n");
 ```
 
 ### borders
 Add borders with a syntax similar to CSS.  You can use HTML Color names, rgb, or rgba.
 ```php
-echo cloudinary_url('blackberry', [
-    'transformation' => [
-        'border'    => '10px_solid_rgb:bde4fb',
-        'width'     => 300,
-        'height'    => 300,
-        'crop'      => 'thumb',
-        'gravity'   => 'auto',
-        'fetch_format'=> 'auto',
-        'quality'   => 'auto',
-        'radius'    => 'max',
-    ],
-]);
+echo ($cloudinary->image('blackberry')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->border(Border::solid()->width(10)->color(Color::rgb('#bde4fb')))
+  ->format(Format::png())
+  ->quality(Quality::auto()) . "\n");
 ```
 
 ### Add background when there is padding
 ```php
 // crop pad to capture full image with padding to prevent skew
 // change AR vertical to horizontal 
-echo cloudinary_url('face', [
-    'transformation' => [
-        'width'         => 300,
-        'height'        => 200,
-        'crop'          => 'pad',
-        'fetch_format'  => 'auto',
-        'quality'       => 'auto',
-        'background'    => 'red',
-    ],
-]);
+// use a white border to see the auto padding
+echo ($cloudinary->image('face')
+  ->resize(Resize::pad(300,200,Background::auto())
+  ->gravity(Gravity::south()))
+  ->border(Border::solid()->width(10)->color(Color::WHITE))
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
 ```
 
 ### Effect option
 
 #### Outline transparent images
 Use the `effect` option. Set the width of the outline in pixels. 
+
 ```php
-echo cloudinary_url('blackberry', [
-    'transformation' => [
-        'width'         => 300,
-        'height'        => 300,
-        'crop'          => 'thumb',
-        'gravity'       => 'auto',
-        'quality'       => 'auto',
-        'effect'        => 'outline:15',
-        'color'         => 'orange',
-        'fetch_format'  => 'png'
-    ],
-]);
+echo ($cloudinary->image('blackberry')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(Effect::outline(15) -> color(Color::ORANGE))
+  ->quality(Quality::auto())
+  ->format(Format::png()) . "\n");
 ```
 
 #### Improve color, contrast and light
+Try commenting out the Improve effect to see the difference.
+
 ```php
-echo cloudinary_url('lake', [
-    'transformation' => [
-        'width'     => 300,
-        'height'    => 300,
-        'crop'      => 'thumb',
-        'gravity'   => 'auto',
-        'fetch_format'=> 'auto',
-        'quality'   => 'auto',
-        'effect'    => 'improve',
-    ],
-]);
+echo ($cloudinary->image('blackberry')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(Improve::OUTDOOR())
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
 ```
 
 #### Art filters
 
 ##### "zorro" is one of many
 ```php
-echo cloudinary_url('lake', [
-    'transformation' => [
-        'width'         => 300,
-        'height'        => 300,
-        'crop'          => 'thumb',
-        'gravity'       => 'auto',
-        'fetch_format'  => 'auto',
-        'quality'       => 'auto',
-        'effect'        => 'art:zorro',
-    ],
-]);
+echo ($cloudinary->image('lake')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(ArtisticFilter::zorro())
+  ->quality(Quality::auto())
+  
 ```
 
 ##### "cartoonify"
 ```php
-echo cloudinary_url('face', [
-    'transformation' => [
-        'width'         => 300,
-        'height'        => 300,
-        'crop'          => 'thumb',
-        'gravity'       => 'face',
-        'fetch_format'  => 'auto',
-        'quality'       => 'auto',
-        'effect'        => 'cartoonify',
-    ],
-]);
+echo ($cloudinary->image('face')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(Effect::cartoonify())
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
+```
 
 ##### "tint": try different colors and intensities
 ```php
-echo cloudinary_url('face', [
-    'transformation' => [
-        'width'         => 300,
-        'height'        => 300,
-        'crop'          => 'thumb',
-        'gravity'       => 'face',
-        'fetch_format'  => 'auto',
-        'quality'       => 'auto',
-        'effect'        => 'tint:40:magenta',
-    ],
-]);
+echo ($cloudinary->image('face')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(Effect::cartoonify())
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
+
+echo ($cloudinary->image('face')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->adjust(Adjust::tint(40, Color::MAGENTA))
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
 ```
 
 ##### "duotone"
 This is a chained transformation.  It instructs Cloudinary to run transformations in sequence.  First a grayscale is set and then the grayscale is tinted. It's coded as an array of transformation objects.  In the URL, you'll see the transformations separated by `/`.
 ```php
-echo cloudinary_url('face', [
-    'transformation' => [
-       [ 
-            'width'         => 300,
-            'height'        => 300,
-            'crop'          => 'thumb',
-            'gravity'       => 'face',
-            'effect'        => 'grayscale',
-        ],[
-            'effect'        => 'tint:40:magenta',
-        ],[
-            'fetch_format'  => 'auto',
-            'quality'       => 'auto',
-        ],
-    ],
-]);
+echo ($cloudinary->image('face')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(Effect::grayscale())
+  ->adjust(Adjust::tint(20, Color::MAGENTA))
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
 ```
 
 ### Overlays
@@ -714,67 +691,57 @@ echo cloudinary_url('face', [
 #### Text over image
 Required options are font_family, font_size, and text.
 ```php
-echo cloudinary_url('faces', [
-    'transformation' => [
-        [ 
-            'width'         => 300,
-            'height'        => 300,
-            'crop'          => 'thumb',
-        ],[
-            'overlay'       => [
-                'font_family'   => 'Arial',
-                'font_size'     => 30,
-                'text'          => 'Tutoring',
-            ],
-            'background'    => 'white',
-            'color'         => 'blue',
-            'gravity'       => 'north_west',
-            'y'             => 10,
-            'x'             => 10,
-        ],
-    ],
-]);
+https://res.cloudinary.com/sep-2020-test/image/upload/c_thumb,g_faces,h_300,w_300/l_text:Arial_30_bold:Tutoring/co_yellow,e_colorize/co_orange,e_outline:5/fl_layer_apply,g_north_west,x_10,y_10/r_30/f_auto/faces
 ```
 
-#### Image over video
+#### Text over image
+
 ```php
-echo cloudinary_url('video', [
-    'resource_type'  => 'video',
-    'transformation' => [
-        [ 
-            'width'         => 400,
-            'crop'          => 'scale',
-        ],[
-            'overlay'       => 'cloudinary-logo',
-            'height'        => 25,
-            'gravity'       => 'south_east',
-        ],
-    ],
-]);
+echo ($cloudinary->image('faces')
+  ->resize(Resize::thumbnail(300,300,Gravity::faces()))
+  ->overlay(
+    Source::text('Tutoring')
+      ->fontFamily('Arial')
+      ->fontSize(30)
+      ->fontWeight(FontWeight::BOLD) //weight is optional
+      ->effect(Effect::colorize()->color(Color::YELLOW))
+      ->effect(Effect::outline(5) -> color(Color::ORANGE)
+      //// ->background(Color::WHITE)//how to add background to text?
+  ),
+    Position::northWest()->x(10)->y(10)
+  )
+  ->roundCorners(30)
+  ->format(Format::auto()) . "\n");
+```
+
+#### Image over Image
+
+```php
+echo ($cloudinary->image('working')
+  ->resize(Resize::scale(400))
+  ->overlay(
+    Source::image('logo')
+      ->resize(Resize::thumbnail(50, 50))
+      ->adjust(Adjust::opacity(30))
+    ,
+    Position::northEast()->x(10)->y(10)
+  )
+). "\n";
+
 ```
 
 #### Text over video
 ```php
-echo cloudinary_url('video', [
-    'resource_type'  => 'video',
-    'transformation' => [
-        [ 
-            'width'         => 300,
-            'crop'          => 'scale',
-        ],[
-            'overlay'       => [
-                'font_family'   => 'Arial',
-                'font_size'     => 30,
-                'text'          => 'Earth',
-            ],
-            'background'    => 'white',
-            'color'         => 'blue',
-            'gravity'       => 'north_west',
-            'y'             => 10,
-            'x'             => 10,
-        ],
-    ],
-]);
+echo ($cloudinary->video('video')
+  ->resize(Resize::scale(400))
+  ->overlay(
+    Source::image('logo')
+      ->resize(Resize::thumbnail(50, 50))
+      ->adjust(Adjust::opacity(30))
+    ,
+    Position::northEast()->x(10)->y(10)
+  )
+). "\n";
 ```
 
 ## Named Transformations
@@ -873,3 +840,5 @@ echo $cloudinary->image('shirt_only.png')
 ->format(Format::auto())
 ->toUrl() 
 ```
+### Singleton
+

@@ -1,50 +1,37 @@
 <?php
-
-
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Cloudinary\Asset\Video;
 use Cloudinary\Cloudinary;
-use Cloudinary\Configuration\Configuration;
+use Cloudinary\Asset\Video;
 use Cloudinary\Transformation\Resize;
 use Cloudinary\Transformation\Gravity;
-use Cloudinary\Transformation\Crop;
 use Cloudinary\Transformation\Quality;
 use Cloudinary\Transformation\Format;
 use Cloudinary\Transformation\CornerRadius;
 use Cloudinary\Transformation\Border;
 use Cloudinary\Transformation\Background;
-use Cloudinary\Transformation\Argument;
 use Cloudinary\Transformation\Argument\Color;
 use Cloudinary\Transformation\Effect;
 use Cloudinary\Transformation\Improve;
 use Cloudinary\Transformation\ArtisticFilter;
 use Cloudinary\Transformation\Adjust;
-use Cloudinary\Tag\ImageTag;
 use Cloudinary\Transformation\Argument\Text\FontWeight;
 use Cloudinary\Transformation\Cartoonify;
-
-
 use Cloudinary\Transformation\Overlay;
 use Cloudinary\Transformation\Source;
 use Cloudinary\Transformation\Position;
-use Cloudinary\Transformation\LayerSource;
 
 # Config
 
-# Singleton - can't use for aliasing
-# $cloudinary = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
-Configuration::instance(['account' => ['cloud_name' => 'sep-2020-test', 'api_key' => '892275429346483', 'api_secret' => 'TqPTlL652atsfH4CWGv8ot7PAdg']]);
-// print_r($cloudinary);
 
 # Constructor
-
 # $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 
 // print_r($cloudinary->configuration->account->cloudName);
 
 echo "\n";
 
+$cloudinary = new Cloudinary('cloudinary://892275429346483:TqPTlL652atsfH4CWGv8ot7PAdg@sep-2020-test');
 
 
 # Radius - generate a cirucle for 1:1 aspect ratio and png format
@@ -67,17 +54,9 @@ echo "\n";
 # can't use gravity auto with pad but you can direct the location of the padding
 
 // echo ($cloudinary->image('face')
-//   ->resize(Resize::pad(300,200,Background::auto())->gravity(Gravity::south()))
-//   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
-
-// echo ($cloudinary->image('face')
-//   ->resize(Resize::pad(300,200,Background::color(Color::RED))->gravity(Gravity::south()))
-//   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
-
-// echo ($cloudinary->image('face')
-//   ->resize(Resize::pad(300,200,Background::color(Color::RED))->gravity(Gravity::east()))
+//   ->resize(Resize::pad(300,200,Background::auto())
+//   ->gravity(Gravity::south()))
+//   ->border(Border::solid()->width(10)->color(Color::WHITE))
 //   ->quality(Quality::auto())
 //   ->format(Format::auto()) . "\n");
 
@@ -117,6 +96,15 @@ echo "\n";
 //   ->quality(Quality::auto())
 //   ->format(Format::auto()) . "\n");
 
+// echo $cloudinary->image('face') 
+// -> effect(Effect::cartoonify())
+// -> roundCorners(CornerRadius::max())
+// -> effect(Effect::outline(100) -> color(Color::orange()))
+// -> background(Color::lightblue())
+// -> resize(Resize::scale() -> height(300))
+// ->toUrl() . "\n";
+
+
 # tint
 // use Cloudinary\Transformation\ImageAdjustmentTrait;
 
@@ -145,7 +133,6 @@ echo "\n";
 //   ->format(Format::auto()) . "\n");
 
 
-
 # Overlays
 
 # Text over image
@@ -166,7 +153,7 @@ echo "\n";
 //   ->roundCorners(30)
 //   ->format(Format::auto()) . "\n");
 
-# Image over text
+# Image over image
 
 // echo ($cloudinary->image('working')
 //   ->resize(Resize::scale(400))
@@ -214,13 +201,7 @@ echo "\n";
 // ). "\n";
 
 
-// echo $cloudinary->image('face') 
-// -> effect(Effect::cartoonify())
-// -> roundCorners(CornerRadius::max())
-// -> effect(Effect::outline(100) -> color(Color::orange()))
-// -> background(Color::lightblue())
-// -> resize(Resize::scale() -> height(300))
-// ->toUrl() . "\n";
+
 
 
 
