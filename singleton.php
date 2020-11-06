@@ -1,5 +1,6 @@
 <?php
 
+// https://cloudinary.com/documentation/sdk2_migration
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -101,13 +102,18 @@ echo (VideoTag::fromParams("video.jpg",
 //   ],
 // ]);
 
-// this does not work in php1
-// echo cloudinary_url('lake', 
-// ['transformation' => [
-//       ['width'     => 300],
-//       ['crop'      => 'scale'],
-//       ['radius'    => 'max]',
-//       ['background' => 'lightblue']
-//   ],
-// ]]);
+// this works in php2
+// for URL you'd replace cloudinary-url with Media::from Params with singleton config
+echo (Media::fromParams("lake", 
+["transformation"=>
+  [
+    "height"=>300, 
+    "crop"=>"scale",
+    "radius"=>"max",
+    "background"=>"lightblue",
+    "height"=>300, "crop"=>"scale"
+  ]
+]) . "\n");
+
+
 

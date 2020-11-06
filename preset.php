@@ -24,7 +24,7 @@ $api = $cloudinary->adminApi();
 // Unsigned Preset
 
 // print_r($api->createUploadPreset([
-//   'name'              => 'unsigned-name',
+//   'name'              => 'unsigned-preset',
 //   'unsigned'          => true,
 //   'tags'              => 'unsigned',
 //   'allowed_formats'   => 'jpg,png',
@@ -39,7 +39,7 @@ $api = $cloudinary->adminApi();
 // Create signed preset
 
 // print_r($api->createUploadPreset([
-//   'name'              => 'signed-name',
+//   'name'              => 'signed-preset',
 //   'unsigned'          => false,
 //   'tags'              => 'signed',
 //   'allowed_formats'   => 'jpg,png',
