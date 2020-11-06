@@ -840,5 +840,117 @@ echo $cloudinary->image('shirt_only.png')
 ->format(Format::auto())
 ->toUrl() 
 ```
-### Singleton
+## Singleton
 
+We have been working with a configuration that creates a new instance of Cloudinary. This allows us to have multiple instances representing different accounts.  Now we'll look at using a Singleton where there will only be once instance of Cloudinary representing a single account.  We can use a syntax more like the SDK1 when we use the singleton.
+
+### Classes for this exercise
+
+```php
+use Cloudinary\Configuration\Configuration;
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Asset\Media;
+use Cloudinary\Api\Admin\AdminApi;
+use Cloudinary\Tag\ImageTag;
+use Cloudinary\Tag\VideoThumbnailTag;
+use Cloudinary\Tag\VideoTag;
+```
+
+```php
+$cloudinary = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
+
+```
+
+Create variable references for the APIs.
+
+```php
+// use variable reference
+$upload = new UploadApi();
+$api = new AdminApi();
+```
+
+### Upload API
+
+```php
+print_r((new UploadApi())->upload('./assets/cheesecake.jpg'));
+// or
+print_r($upload->upload('./assets/cheesecake.jpg'));
+
+```
+
+### Admin API
+
+Using the Admin API with a singleton.
+
+```php
+print_r((new AdminApi())->resource("cheesecake")); 
+// or
+print_r($api->resource("cheesecake"));
+```
+### Use Media::fromParams to create a Transformation URL
+Specify the array using the keyword or symbol. This look like SDK 1 syntax.
+
+```php
+echo (Media::fromParams("lake", array("transformation"=>array(
+  array("effect"=>"cartoonify"),
+  array("radius"=>"max"),
+  array("background"=>"lightblue"),
+  array("height"=>300, "crop"=>"scale")
+  )))->toUrl()) . "\n";
+
+echo (Media::fromParams("lake", 
+["transformation"=>
+  [
+    ["effect"=>"cartoonify"],
+    ["radius"=>"max"],
+    ["background"=>"lightblue"],
+    ["height"=>300, "crop"=>"scale"]
+  ]
+]) . "\n");
+```
+### Create an Image Tag from Params
+
+```php
+echo (ImageTag::fromParams("lake", 
+["transformation"=>
+  [
+    ["effect"=>"cartoonify"],
+    ["radius"=>"max"],
+    ["background"=>"lightblue"],
+    ["height"=>300, "crop"=>"scale"]
+  ]
+]) . "\n");
+```
+
+### Create a Video Thumbnail Tag from Params
+
+```php
+echo (VideoThumbnailTag::fromParams("video.jpg", 
+  [
+    "start_offset"=>"1", 
+    "width"=>350, 
+    "height"=>350,
+    "border"=>"5px_solid_white", 
+    "crop"=>"thumb", 
+    "resource_type"=>"video"
+  ]
+) . "\n");
+```
+
+
+
+### Create a Video Tag from Params
+
+```php
+echo (VideoTag::fromParams("video.jpg", 
+  [
+    "start_offset"=>"1", 
+    "width"=>350, 
+    "height"=>350,
+    "border"=>"5px_solid_white", 
+    "crop"=>"thumb", 
+    "resource_type"=>"video"
+  ]
+) . "\n");
+
+```

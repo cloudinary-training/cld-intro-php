@@ -31,8 +31,6 @@ use Cloudinary\Transformation\Position;
 
 echo "\n";
 
-$cloudinary = new Cloudinary('cloudinary://892275429346483:TqPTlL652atsfH4CWGv8ot7PAdg@sep-2020-test');
-
 
 # Radius - generate a cirucle for 1:1 aspect ratio and png format
 
