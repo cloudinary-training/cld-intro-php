@@ -3,18 +3,16 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
-// use Cloudinary\Asset\DeliveryType;
-// use Cloudinary\Transformation\Resize;
-
 
 // Constructor
 $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 // print_r($cloudinary->configuration->account->cloudName);
 // echo "\n";
 
-# Alias the upload API
+
+# Reference the upload API
 $uploader = $cloudinary->uploadApi();
-#alias the admin API
+# Reference the admin API
 $api = $cloudinary->adminApi();
 
 # List all assets (default is 10)
@@ -42,17 +40,16 @@ $api = $cloudinary->adminApi();
 
 # Admin API: delete_resource
 # upload 2 assets and them remove them
+
 // print_r($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']));
 // print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
 // print_r($api->deleteResources(['dog','lake'],['invalidate'=>true]));
 
 
 # Tag on Upload
-
-// print_r($uploader->upload('./assets/blackberry.jpg',['public_id'=>'blackberry','tags'=>['fruit','berries']]));
-# by string with comma-separated
-// print_r($uploader->upload('./assets/blackberry.jpg',['public_id'=>'blackberry','tags'=>'fruit,berries']));
-// print_r($api->resourcesByTag('berries',['tags'=>true]));
+# by string with comma-separated tags
+//  print_r($uploader->upload('./assets/blackberry.jpg',['public_id'=>'blackberry','tags'=>'fruit,berries']));
+//  print_r($api->resourcesByTag('berries',['tags'=>true]));
 
 # Tag after Upload
 
@@ -69,5 +66,5 @@ $api = $cloudinary->adminApi();
 # Remove all tags list of public ids to remove tags
 // print_r($uploader->removeAllTags(['blackberry','lake']));
 // print_r($api->resourcesByTag('fruit',['tags'=>true]));
-// print_r($api->resourcesByTag('water',['tags'=>true]));
+//print_r($api->resourcesByTag('water',['tags'=>true]));
 

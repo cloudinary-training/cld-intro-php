@@ -2,6 +2,15 @@
 
 https://cloudinary.com/documentation/sdks/php/Cloudinary/Cloudinary.html
 
+* Upload
+* Presets
+* Auto-upload-Fetch
+* Manage
+* Upload For Transformations
+* Optimization Transformations
+* Aesthetic Transformations
+* Named Transformations
+
 
 ### Mac
 Mac comes with PHP installed.
@@ -270,8 +279,16 @@ echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
 
 ## Manage
 
-### Create a new Admin API object:
+### Classes to Import for Exercise
+
 ```php
+use Cloudinary\Cloudinary;
+```
+
+### Create Upload and API references
+```php
+$uploader = $cloudinary->uploadApi();
+
 $api = new \Cloudinary\Api();
 ```
 
@@ -291,10 +308,12 @@ print_r($api->resources(['type'=>'upload','prefix'=>'sample']));
 ```
 
 ### Rename an asset default overwrite is false
-# Reupload cheesecake if needed 
+### Re-upload cheesecake if needed 
+
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']));
-print_r(\Cloudinary\Uploader::rename('cheesecake','my_cheesecake',['overwrite'=>true]));
+print_r($uploader->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']));
+print_r($uploader->rename('cheesecake','my_cheesecake',['overwrite'=>true]));
+// 
 ```
 
 ### Remove an asset
@@ -305,9 +324,10 @@ Deleting from a CDN is different that deleting from a database.  It can take tim
 Use `invalide:true` to remove from CDN.  May take some time depending on CDN.  You remove only 1 asset at a time with the Upload API.
 
 #### load a file to delete, invalidate is false by default, doesn't remove derived
+
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/lake.jpg',['public_id'=>'lake']));
-print_r(\Cloudinary\Uploader::destroy('lake',['invalidate'=>true]));
+print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
+print_r($uploader->destroy('lake',['invalidate'=>true]));
 ```
 
 #### Admin API: `delete_resource`
@@ -315,74 +335,97 @@ You can remove multiple assets at a time with the Admin API.  There is a daily q
 
 ```php
 # upload 2 assets and them remove them
-print_r(\Cloudinary\Uploader::upload('./assets/dog.jpg',['public_id'=>'dog']));
-print_r(\Cloudinary\Uploader::upload('./assets/lake.jpg',['public_id'=>'lake']));
-print_r($api->delete_resources(['dog','lake'],['invalidate'=>true]));
+print_r($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']));
+print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
+print_r($api->deleteResources(['dog','lake'],['invalidate'=>true]));
 ```
 
 ### Tag on Upload
 You can supply tags and other metadata like Context on upload.  You can then find assets by tag.
-```php
-// by array
-print_r(\Cloudinary\Uploader::upload('./assets/blackberry.jpg',['public_id'=>'blackberry','tags'=>['fruit','berries']]));
 
-// by string with comma-separated
-print_r(\Cloudinary\Uploader::upload('./assets/blackberry.jpg',['public_id'=>'blackberry','tags'=>'fruit,berries']));
-print_r($api->resources_by_tag('berries',['tags'=>true]));
+```php
+print_r($uploader->upload('./assets/blackberry.jpg',['public_id'=>'blackberry','tags'=>'fruit,berries']));
+
+print_r($api->resourcesByTag('berries',['tags'=>true]));
 ```
 
 ### Tag after upload 
 You can add tags to assets that are already in the Media Library.  You can also include an option, `tags:true` to show all tags per asset found in the result.
+
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/lake.jpg',['public_id'=>'lake']));
-print_r(\Cloudinary\Uploader::add_tag('water','lake'));
-print_r($api->resources_by_tag('water',['tags'=>true]));
+print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
+print_r($uploader->addTag('water','lake'));
+print_r($api->resourcesByTag('water',['tags'=>true]));
 ```
 
-### Remove a single tag by name; search by removed tag and unremoved tag
-```php
-print_r(\Cloudinary\Uploader::remove_tag('berries','blackberry'));
-print_r($api->resources_by_tag('berries',['tags'=>true]));
-print_r($api->resources_by_tag('fruit',['tags'=>true]));
-```
+### Remove a single tag by name; search by removed tag and un-removed tag
 
+```php
+print_r($uploader->removeTag('berries','blackberry'));
+print_r($api->resourcesByTag('berries',['tags'=>true]));
+print_r($api->resourcesByTag('fruit',['tags'=>true]));
+```
+### -------?????
 ### Remove all tags list of public ids to remove tags
 ```php
-print_r(\Cloudinary\Uploader::remove_all_tags(['blackberry','lake']));
-print_r($api->resources_by_tag('fruit',['tags'=>true]));
-print_r($api->resources_by_tag('water',['tags'=>true]));
+print_r($uploader->removeAllTags(['blackberry','lake']));
+print_r($api->resourcesByTag('fruit',['tags'=>true]));
+print_r($api->resourcesByTag('water',['tags'=>true]));
 ```
 
 ## Upload for Transformations
-In order to have a set of assets available for delivery scripts, please run the following:
+In order to have a set of assets available for delivery scripts, upload the following assets.
+
+### Use these Classes
 
 ```php
-print_r(\Cloudinary\Uploader::upload('./assets/blackberry.jpg',['public_id'=>'blackberry']));
-print_r(\Cloudinary\Uploader::upload('./assets/BLKCHCRY.TTF','resource_type'=>'raw']));
-print_r(\Cloudinary\Uploader::upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']));
-print_r(\Cloudinary\Uploader::upload('./assets/dog.jpg',['public_id'=>'dog']));
-print_r(\Cloudinary\Uploader::upload('./assets/face.jpg',['public_id'=>'face']));
-print_r(\Cloudinary\Uploader::upload('./assets/faces.jpg',['public_id'=>'faces']));
-print_r(\Cloudinary\Uploader::upload('./assets/lake.jpg',['public_id'=>'lake']));
-print_r(\Cloudinary\Uploader::upload('./assets/logo.png',['public_id'=>'logo']));
-print_r(\Cloudinary\Uploader::upload('./assets/video.mp4',['public_id'=>'video','resource_type'=>'raw']));
-print_r(\Cloudinary\Uploader::upload('./assets/demo-cloudinary-logo.png',['public_id'=>'demo/cloudinary_logo']));
-print_r(\Cloudinary\Uploader::upload('./assets/heather_texture.png',['public_id'=>'demo/heather_texture']));
-print_r(\Cloudinary\Uploader::upload('./assets/model2.png',['public_id'=>'demo/model2']));
-print_r(\Cloudinary\Uploader::upload('./assets/shirt_only.png',['public_id'=>'shirt_only']));
+use Cloudinary\Cloudinary;
+```
 
-print_r(\Cloudinary\Uploader::upload('https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg',['public_id'=>'cookies']));
-print_r(\Cloudinary\Uploader::upload('./assets/working.jpg',['public_id'=>'working']));
+```php
+print_r($uploader->upload('./assets/blackberry.jpg',['public_id'=>'blackberry'])["public_id"]);
+
+print_r($uploader->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake'])["public_id"]);
+
+print_r($uploader->upload('./assets/dog.jpg',['public_id'=>'dog'])["public_id"]);
+
+print_r($uploader->upload('./assets/face.jpg',['public_id'=>'face'])["public_id"]);
+
+print_r($uploader->upload('./assets/faces.jpg',['public_id'=>'faces'])["public_id"]);
+
+print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake'])["public_id"]);
+
+print_r($uploader->upload('./assets/logo.png',['public_id'=>'logo'])["public_id"]);
+
+print_r($uploader->upload('./assets/video.mp4',['public_id'=>'video','resource_type'=>'raw'])["public_id"]);
+
+print_r($uploader->upload('./assets/shirt_only.png',['public_id'=>'shirt_only'])["public_id"]);
+
+print_r($uploader->upload('https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg',['public_id'=>'cookies'])["public_id"]);
+
+print_r($uploader->upload('./assets/working.jpg',['public_id'=>'working'])["public_id"]);
+
 ```
 
 ## Optimization Transformations
 Look at cropping, compression and optimal browser formats.  Cropping modes (scale, crop, thumb, fit, fill, and more) have different use cases and different options available.
 
+### Classes to use for exercise
+
+```php
+use Cloudinary\Cloudinary;
+use Cloudinary\Transformation\Resize;
+use Cloudinary\Transformation\Gravity;
+use Cloudinary\Transformation\Crop;
+use Cloudinary\Transformation\Quality;
+use Cloudinary\Transformation\Format;
+```
+
 ### Cropping
 
 #### scale: Default copping mode with 1 dimension is scale
 ```php
-echo cloudinary_url('cheesecake',['transformation'=>['width'=>300,'crop'=>'scale']]);
+echo ($cloudinary->image('cheesecake')->resize(Resize::scale(300)) . "\n");
 ```
 If you add a second dimension with the `scale` crop mode, it may skew the image depending the image's original aspect ratio.
 ```php
@@ -391,53 +434,75 @@ echo cloudinary_url('cheesecake',['transformation'=>['width'=>300,'height'=>300,
 
 #### fit: Applying 2 dimensions to a crop mode without skew
 You can use the `fit` mode to guarantee that the image will render without skew within the boundaries defined by the `width` and `height` options.  However, the dimensions of the image may not match the `width` and `height` when you use `fit`.
+
 ```php
-echo cloudinary_url('cheesecake',['transformation'=>['width'=>300,'height'=>300,'crop'=>'fit']]);
+echo ($cloudinary->image('cheesecake')->resize(Resize::scale(300,400)) . "\n");
+echo ($cloudinary->image('cheesecake')->resize(Resize::scale()->width(300)->height(400)) . "\n");
+
+echo ($cloudinary->image('cheesecake')->resize(Resize::fit()->width(300)->height(400)) . "\n");
+
 ```
 
 #### pad: Apply 2 dimensions with no skew 
 ```php
-echo cloudinary_url('cheesecake',['transformation'=>['width'=>300,'height'=>300,'crop'=>'pad']]);
+echo ($cloudinary->image('cheesecake')->resize(Resize::pad()->width(300)->height(400)) . "\n");
 ```
 
-#### crop: Intro to Gravity
+### crop: Intro to Gravity
 Gravity provides focus.  You can apply compass point gravity or let Cloudinary find the focus using `gravity: auto`.  You can only use gravity with the `crop`, `fill`, `fill_pad` (auto only), and `thumb` crop modes.
 
 #### Crop mode without gravity
-Without gravity, all you see is a chunk of dog fur.
+Without gravity, all you see is a chunk of dog fur. 
 ```php
-echo cloudinary_url('dog',['transformation'=>['width'=>300,'height'=>300,'crop'=>'crop']]);
+echo ($cloudinary->image('dog')->resize(Resize::crop()->width(300)->height(300)) . "\n");
+
 ```
 
 #### Crop mode with gravity
 In these examples you see the effect of gravity working with the `thumb` mode.
 ```php
-echo cloudinary_url('dog',['transformation'=>['width'=>300,'height'=>300,'crop'=>'thumb','gravity'=>'auto']]);
-echo cloudinary_url('cheesecake',['transformation'=>['width'=>300,'height'=>300,'crop'=>'thumb','gravity'=>'auto']]);
+echo ($cloudinary->image('dog')->resize(Resize::thumbnail(300,300,Gravity::auto())) . "\n");
 ```
 
-#### Crop with gravity:auto, fill vs thumb
+#### Crop with gravity:auto, fill vs fill-pad
 Not all crop types can use gravity, only: `crop`, `fill`, `lfill`, `fill_pad` or `thumb`
 ```php
-echo cloudinary_url('face',['transformation'=>['width'=>300,'height'=>300,'crop'=>'fill','gravity'=>'auto']]);
-echo cloudinary_url('face',['transformation'=>['width'=>300,'height'=>300,'crop'=>'thumb','gravity'=>'auto']]);
+echo ($cloudinary->image('working')->resize(Resize::fill(400,400,Gravity::auto())) . "\n");
+
+echo ($cloudinary->image('working')->resize(Resize::fillPad(400,400,Gravity::auto())) . "\n");
+
 ```
 
-#### debug gravity auto
-Generate a URL with gravity auto and debug to better understand how the AI that detects objects is working.  The `gravity:auto` option appears in the URL as `g_auto`.
-# TODO, is it ok to share?
+#### Gravity with compass positions
+
+```php
+echo ($cloudinary->image('face')->resize(Resize::thumbnail(300,300,Gravity::south())) . "\n");
+echo ($cloudinary->image('face')->resize(Resize::thumbnail(300,300,Gravity::north())) . "\n");
+```
+#### Gravity: Fill vs Thumb
+
+```php
+echo ($cloudinary->image('face')->resize(Resize::fill(300,300,Gravity::auto())) . "\n");
+echo ($cloudinary->image('face')->resize(Resize::thumbnail(300,300,Gravity::auto())) . "\n");
+```
 
 #### gravity:face
 Cloudinary can detect faces.  Specify gravity for the face.
 ```php
-echo cloudinary_url('working',['transformation'=>['width'=>300,'height'=>300,'crop'=>'crop','gravity'=>'face']]);
-echo cloudinary_url('working',['transformation'=>['width'=>300,'height'=>300,'crop'=>'thumb','gravity'=>'face']]);
+echo ($cloudinary->image('working')->resize(Resize::thumbnail(300,300,Gravity::face())) . "\n");
+
+echo ($cloudinary->image('working')->resize(Resize::thumbnail(300,300)) . "\n");
+
+
 ```
 
 #### Branding and Watermarking using cropping
+ 2 different ways to specify width and height
 ```php
-echo cloudinary_url('logo',['transformation'=>['width'=>100,'height'=>100,'crop'=>'thumb']]);
-echo cloudinary_url('cloudinary-logo',['transformation'=>['width'=>100,'crop'=>'scale']]);
+echo ($cloudinary->image('logo')->resize(Resize::thumbnail()->width(100)->height(100)) . "\n");
+
+echo ($cloudinary->image('logo')->resize(Resize::thumbnail(100,100)) . "\n");
+
 ```
 
 ### Compression
@@ -446,8 +511,8 @@ Compression is provided with the `quality` option.  You can specify a numeric va
 
 Use Cloudinary Media Inspector in the browser to compare file size in the following images.
 ```php
-echo cloudinary_url('cookies');
-echo cloudinary_url('cookies',['transformation'=>['quality'=>'auto']]);
+echo ($cloudinary->image('cookies') . "\n");
+echo ($cloudinary->image('cookies')->quality(Quality::auto()). "\n");
 ```
 
 ### Browser file formats
@@ -466,10 +531,25 @@ In the example below we generate "auto everything"
 
 ```php
 // without auto format
-echo cloudinary_url('lake',['transformation'=>['height'=>400,'crop'=>'fill','gravity'=>'auto','quality'=>'auto']]);
+echo cloudinary_url('lake',[
+    'transformation'=>[
+        'height'=>400,
+        'crop'=>'fill',
+        'gravity'=>'auto',
+        'quality'=>'auto'
+    ]
+]);
 
 // with auto format
-echo cloudinary_url('lake',['transformation'=>['height'=>400,'crop'=>'fill','gravity'=>'auto','quality'=>'auto','fetch_format'=>'auto']]);
+echo cloudinary_url('lake',[
+    'transformation'=>[
+        'height'=>400,
+        'crop'=>'fill',
+        'gravity'=>'auto',
+        'quality'=>'auto',
+        'fetch_format'=>'auto'
+    ]
+]);
 ```
 
 ## Aesthetic Transformations
