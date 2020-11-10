@@ -14,7 +14,7 @@ use Cloudinary\Transformation\Format;
 # Config
 # Constructor
 
-# $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
+$cloudinary = new Cloudinary();
 print_r($cloudinary->configuration->account->cloudName);
 
 echo "\n";
@@ -72,8 +72,8 @@ echo "\n";
 # Branding and Watermarking using cropping 
 # 2 different syntax to specify width and height with same result
 
-echo ($cloudinary->image('logo')->resize(Resize::thumbnail()->width(100)->height(100)) . "\n");
-echo ($cloudinary->image('logo')->resize(Resize::thumbnail(100,100)) . "\n");
+// echo ($cloudinary->image('logo')->resize(Resize::thumbnail()->width(100)->height(100)) . "\n");
+// echo ($cloudinary->image('logo')->resize(Resize::thumbnail(100,100)) . "\n");
 
 
 # Compression using quality

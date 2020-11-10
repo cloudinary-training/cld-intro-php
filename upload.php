@@ -1,17 +1,15 @@
 <?php
-
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
 
 // Config with Constructor
-$cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
+$cloudinary = new Cloudinary();
 print_r($cloudinary->configuration->account->cloudName);
 echo "\n";
 
-# Alias the upload API
-$uploader = $cloudinary->uploadApi();
+# Reference the upload API
+// $uploader = $cloudinary->uploadApi();
 
 # Upload
 

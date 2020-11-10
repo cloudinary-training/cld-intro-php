@@ -13,17 +13,24 @@ use Cloudinary\Tag\VideoThumbnailTag;
 use Cloudinary\Tag\VideoTag;
 
 
+
 // Config
 
 // Singleton - can't use for aliasing
-// $cloudinary = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
+// $config = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
+
+// or 
+// in terminal export CLOUDINARY_URL=""
+$config = Configuration::instance();
+
+// verify config
+print_r($config->account->cloudName);
+echo "\n";
+
 
 // use variable reference
 $upload = new UploadApi();
 $api = new AdminApi();
-
-print_r($cloudinary->account->cloudName);
-echo "\n";
 
 # Upload an image and supply a public id of 20 random characters
 # image is the default
@@ -49,10 +56,10 @@ echo "\n";
 // echo (Media::fromParams("lake", 
 // ["transformation"=>
 //   [
-//     ["effect"=>"cartoonify"],
-//     ["radius"=>"max"],
-//     ["background"=>"lightblue"],
-//     ["height"=>300, "crop"=>"scale"]
+//     "effect"=>"cartoonify",
+//     "radius"=>"max",
+//     "background"=>"lightblue",
+//     "height"=>300, "crop"=>"scale"
 //   ]
 // ]) . "\n");
 

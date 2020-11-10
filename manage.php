@@ -1,14 +1,12 @@
 <?php
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
 
 // Constructor
-$cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
-// print_r($cloudinary->configuration->account->cloudName);
-// echo "\n";
-
+$cloudinary = new Cloudinary();
+print_r($cloudinary->configuration->account->cloudName);
+echo "\n";
 
 # Reference the upload API
 $uploader = $cloudinary->uploadApi();
@@ -63,8 +61,10 @@ $api = $cloudinary->adminApi();
 // print_r($api->resourcesByTag('berries',['tags'=>true]));
 // print_r($api->resourcesByTag('fruit',['tags'=>true]));
 
+# bug that prevents remove all tags from working with multiple public ids
+# Issue SNI-3692 - PHP SDK2 Upload API removeAllTags only works with 1 public id has been successfully created.
 # Remove all tags list of public ids to remove tags
-// print_r($uploader->removeAllTags(['blackberry','lake']));
+// print_r($uploader->removeAllTags('blackberry'));
 // print_r($api->resourcesByTag('fruit',['tags'=>true]));
 //print_r($api->resourcesByTag('water',['tags'=>true]));
 

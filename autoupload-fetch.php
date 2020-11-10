@@ -4,19 +4,20 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Cloudinary\Cloudinary;
 use Cloudinary\Asset\DeliveryType;
 use Cloudinary\Transformation\Resize;
+use Cloudinary\Asset;
 
 
 // Constructor
-$cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
-// print_r($cloudinary->configuration->account->cloudName);
-// echo "\n";
+$cloudinary = new Cloudinary();
+print_r($cloudinary->configuration->account->cloudName);
+echo "\n";
 
 // Alias the upload API
 $uploader = $cloudinary->uploadApi();
 
 // Fetch
 // echo $cloudinary->image('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg')
-//   ->deliveryType(\Cloudinary\Asset\DeliveryType::FETCH) . "\n";
+//   ->deliveryType(DeliveryType::FETCH) . "\n";
 
 
 // Auto-upload Image with cropping

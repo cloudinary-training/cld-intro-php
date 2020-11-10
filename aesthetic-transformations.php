@@ -26,11 +26,9 @@ use Cloudinary\Transformation\Position;
 
 # Constructor
 # $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
-
-// print_r($cloudinary->configuration->account->cloudName);
-
+$cloudinary = new Cloudinary();
+print_r($cloudinary->configuration->account->cloudName);
 echo "\n";
-
 
 # Radius - generate a cirucle for 1:1 aspect ratio and png format
 
@@ -185,7 +183,6 @@ echo "\n";
 // ). "\n";
 
 # Image over Video
-
 
 // echo ($cloudinary->video('video')
 //   ->resize(Resize::scale(400))

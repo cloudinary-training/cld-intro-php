@@ -1,6 +1,4 @@
 <?php
-
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
@@ -13,12 +11,14 @@ use Cloudinary\Transformation\Adjust;
 use Cloudinary\Transformation\Argument\Text\FontWeight;
 use Cloudinary\Transformation\Source;
 use Cloudinary\Transformation\Position;
+use Cloudinary\Transformation\Gravity;
+
+use Cloudinary\Transformation\Transformation;
 
 # Config
 # Constructor
 
-# $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
-
+$cloudinary = new Cloudinary();
 print_r($cloudinary->configuration->account->cloudName);
 
 echo "\n";
@@ -30,6 +30,9 @@ $api = $cloudinary->adminApi();
 
 // print_r($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'));
 
+
+
+
 # Use named transformation
 // echo $cloudinary->image('cheesecake')
 // ->namedTransformation('standard') 
@@ -39,6 +42,19 @@ $api = $cloudinary->adminApi();
 // echo $cloudinary->image('cheesecake')
 // ->namedTransformation('standard') 
 // ->format(Format::auto())
+// ->toUrl() . "\n";
+
+# build out the transformation in code
+
+// $tranformation = new Transformation();
+// $tranformation
+//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+//   ->effect(Effect::grayscale())
+//   ->adjust(Adjust::tint(20, Color::MAGENTA));
+//   print_r($api->createTransformation('duotone',$tranformation));
+
+//   echo $cloudinary->image('face')
+// ->namedTransformation('duotone') 
 // ->toUrl() . "\n";
 
 

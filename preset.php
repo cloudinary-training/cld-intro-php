@@ -5,8 +5,8 @@ use Cloudinary\Cloudinary;
 
 // Config
 // Constructor
-$cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
-// print_r($cloudinary->configuration->account->cloudName);
+$cloudinary = new Cloudinary();
+print_r($cloudinary->configuration->account->cloudName);
 // echo "\n";
 
 // Preset

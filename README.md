@@ -1,5 +1,7 @@
 # Cloudinary Intro using PHP #
 
+https://github.com/cloudinary/cloudinary_php/releases
+
 https://cloudinary.com/documentation/sdks/php/Cloudinary/Cloudinary.html
 
 * Upload
@@ -10,6 +12,7 @@ https://cloudinary.com/documentation/sdks/php/Cloudinary/Cloudinary.html
 * Optimization Transformations
 * Aesthetic Transformations
 * Named Transformations
+* Singleton
 
 
 ### Mac
@@ -37,6 +40,7 @@ Install Cloudinary via composer
 ```bash
 composer require cloudinary/cloudinary_php
  ```
+
 This will create a `composer.json` and `composer.lock`.  For example:
 
 ```js
@@ -47,34 +51,44 @@ This will create a `composer.json` and `composer.lock`.  For example:
 }
 ```
 
-To enter PHP CLI:
+## Config
+
+There are 2 ways you get an instance of the Cloudinary object, and I'll refer to them as "Constructor" and "Singleton".  The "Singleton" provides a single instance of a Cloudinary object configured for a single cloud.  It behaves similar to PHP SDK 1 and is provided to help with migration and the transition from SDK 1 to SDK 2.  The "Constructor" allows you to create multiple Cloudinary objects that can refer to different clouds.  If you are writing new code to take advantage of SDK 2 you will use the "Constructor".  The scripts used in this training will take advantage of SDK 2 functionality by using the "Constructor" and we will cover singleton functionality in the script `singleton.php` at the end of this course.
+
+For both methods of Config, you can export your Cloudinary URL to provide your credentials. For the "Constructor", you would then call the `config` function to read those credentials in.  For the "Singleton" you don't need to make that call but you can if you want access to any of the information in your code.
+
+You can also provide the credentials in the code.  For this training, we'll export the credentials and in code we'll call `config` and output the cloud we're using for verification.
+
+### Constructor 
+
+Export Cloudinary URL
+
+```bash
+export CLOUDINARY_URL=cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+```
+
+Instantiate Cloudinary
 
 ```php
-php -a
-```
-## PHP CLI
-
-Add Cloudinary Library:
-
-```php
-require_once 'vendor/autoload.php';
+use Cloudinary\Cloudinary;
+$cloudinary = new Cloudinary();
+print_r($cloudinary->configuration->account->cloudName);
 ```
 
-There are 2 ways you can make the credentials available.  
-
-## Constructor 
+**Alternative:** Credentials in Code
+If you choose not to export your credentials in your shell you can use one of the following way to read in the credentials in code.
 
 Use this for new PHP SDK2 code to create an instance of the Cloudinary object:
 
 ```php
-$cloudinary = new \Cloudinary\Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
-print_r($cloudinary->configuration);
-print_r($cloudinary->configuration->account->cloudName);
+use Cloudinary\Cloudinary;
+$cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 ```
 
 or  
 
 ```php
+use Cloudinary\Cloudinary;
 $cloudinary = new Cloudinary(
     [
         'account' => [
@@ -88,7 +102,15 @@ $cloudinary = new Cloudinary(
 
 ### Singleton  
 
-Use this for migrating code to PHP SDK2 to create a singleton that allows functionality similar to SDK1.  
+Use this for migrating code to PHP SDK2 to create a singleton that allows functionality similar to SDK1. 
+
+You can just export the Cloudinary URL in your application environment.
+
+```bash
+export CLOUDINARY_URL=cloudinary://API_KEY:API_SECRET@CLOUD_NAME
+```
+
+*Alternative:* Credentials in Code
 
 ```php
 // only for migration
