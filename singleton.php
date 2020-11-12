@@ -24,8 +24,7 @@ use Cloudinary\Tag\VideoTag;
 $config = Configuration::instance();
 
 // verify config
-print_r($config->account->cloudName);
-echo "\n";
+echo $config->account->cloudName . "\n";
 
 
 // use variable reference

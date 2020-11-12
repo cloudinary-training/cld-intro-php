@@ -6,8 +6,7 @@ use Cloudinary\Cloudinary;
 // Config
 // Constructor
 $cloudinary = new Cloudinary();
-print_r($cloudinary->configuration->account->cloudName);
-// echo "\n";
+echo $cloudinary->configuration->account->cloudName . "\n";
 
 // Preset
 
@@ -18,29 +17,29 @@ $api = $cloudinary->adminApi();
 
 // Unsigned Preset
 
-// print_r($api->createUploadPreset([
+// echo json_encode($api->createUploadPreset([
 //   'name'              => 'unsigned-preset',
 //   'unsigned'          => true,
 //   'tags'              => 'unsigned',
 //   'allowed_formats'   => 'jpg,png',
-// ]));
-// echo "\n";
+// ]),JSON_PRETTY_PRINT) . "\n";
 
 // Use unsigned preset in upload
 
-// print_r($uploader->upload('./assets/logo.png',['upload_preset'=>'unsigned-preset']));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/logo.png',
+//   ['upload_preset'=>'unsigned-preset']), JSON_PRETTY_PRINT) . "\n";
 
 // Create signed preset
 
-// print_r($api->createUploadPreset([
+// echo json_encode($api->createUploadPreset([
 //   'name'              => 'signed-preset',
 //   'unsigned'          => false,
 //   'tags'              => 'signed',
 //   'allowed_formats'   => 'jpg,png',
-// ]));
-// echo "\n";
+// ]),JSON_PRETTY_PRINT) . "\n";
 
 // Use signed preset in upload (you can use this in DAM upload)
-// print_r($uploader->upload('./assets/lake.jpg',['upload_preset'=>'signed-preset']));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/lake.jpg',
+//   ['upload_preset'=>'signed-preset']),
+//   JSON_PRETTY_PRINT) . "\n";
+

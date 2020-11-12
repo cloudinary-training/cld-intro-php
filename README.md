@@ -1,6 +1,6 @@
 # Cloudinary Intro using PHP #
 
-https://github.com/cloudinary/cloudinary_php/releases
+
 
 https://cloudinary.com/documentation/sdks/php/Cloudinary/Cloudinary.html
 
@@ -41,7 +41,7 @@ Install Cloudinary via composer
 composer require cloudinary/cloudinary_php
  ```
 
-This will create a `composer.json` and `composer.lock`.  For example:
+This will create a `composer.json` and `composer.lock`. You will need to set the current version for this which you can find [here](https://github.com/cloudinary/cloudinary_php/releases).  In the example below, we are using the beta7 version.
 
 ```js
 {
@@ -72,7 +72,7 @@ Instantiate Cloudinary
 ```php
 use Cloudinary\Cloudinary;
 $cloudinary = new Cloudinary();
-print_r($cloudinary->configuration->account->cloudName);
+echo $cloudinary->configuration->account->cloudName;
 ```
 
 **Alternative:** Credentials in Code

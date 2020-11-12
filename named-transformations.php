@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
@@ -13,32 +14,27 @@ use Cloudinary\Transformation\Source;
 use Cloudinary\Transformation\Position;
 use Cloudinary\Transformation\Gravity;
 
+
 use Cloudinary\Transformation\Transformation;
 
 # Config
 # Constructor
 
 $cloudinary = new Cloudinary();
-print_r($cloudinary->configuration->account->cloudName);
+echo $cloudinary->configuration->account->cloudName . "\n";
 
-echo "\n";
 
 #alias the admin API
 $api = $cloudinary->adminApi();
 
 # Create a simple named transformation from a string
+// echo json_encode($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'),JSON_PRETTY_PRINT) . "\n";
 
-// print_r($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'));
-
-
-
-
-# Use named transformation
+# Use named transformation standard
 // echo $cloudinary->image('cheesecake')
-// ->namedTransformation('standard') 
-// ->toUrl() . "\n";
+// ->namedTransformation('standard') . "\n";
 
-// # using named transform with f_auto: chain
+# using named transform with f_auto: chain
 // echo $cloudinary->image('cheesecake')
 // ->namedTransformation('standard') 
 // ->format(Format::auto())
@@ -46,16 +42,28 @@ $api = $cloudinary->adminApi();
 
 # build out the transformation in code
 
+# code without a variable
+// echo $cloudinary->image('face')
+// ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+// ->effect(Effect::grayscale())
+// ->adjust(Adjust::tint(20, Color::MAGENTA));
+
+# create a variable
 // $tranformation = new Transformation();
 // $tranformation
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->effect(Effect::grayscale())
 //   ->adjust(Adjust::tint(20, Color::MAGENTA));
-//   print_r($api->createTransformation('duotone',$tranformation));
 
+# add the transformation to an image
+// echo ($cloudinary->image('face') -> addTransformation($tranformation)) . "\n";
+
+# create a named transformation for duotone
+// echo json_encode($api->createTransformation('duotone',$tranformation),JSON_PRETTY_PRINT) . "\n";
+
+# use the named transformation
 //   echo $cloudinary->image('face')
-// ->namedTransformation('duotone') 
-// ->toUrl() . "\n";
+// ->namedTransformation('duotone') . "\n";
 
 
 # here's a complex transformation

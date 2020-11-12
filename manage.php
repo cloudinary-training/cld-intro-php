@@ -5,8 +5,7 @@ use Cloudinary\Cloudinary;
 
 // Constructor
 $cloudinary = new Cloudinary();
-print_r($cloudinary->configuration->account->cloudName);
-echo "\n";
+echo $cloudinary->configuration->account->cloudName . "\n";
 
 # Reference the upload API
 $uploader = $cloudinary->uploadApi();
@@ -15,56 +14,56 @@ $api = $cloudinary->adminApi();
 
 # List all assets (default is 10)
 
-// print_r($api->resources()) . "/n";
+// echo json_encode($api->resources(),JSON_PRETTY_PRINT) . "/n";
 
 # List up to 500 assets
-
-// print_r($api->resources(['max_results'=>500])) . "/n";
+// echo json_encode ,JSON_PRETTY_PRINT);
+// echo json_encode($api->resources(['max_results'=>500]),JSON_PRETTY_PRINT) . "/n";
 
 # Search by prefix (public id "starts with")
 
-// print_r($api->resources(['type'=>'upload','prefix'=>'sample']));
+// echo json_encode($api->resources(['type'=>'upload','prefix'=>'sample']),JSON_PRETTY_PRINT)  . "\n";
 
 # Rename an asset, default overwrite is false
 
-// print_r($uploader->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']));
-// print_r($uploader->rename('cheesecake','my_cheesecake',['overwrite'=>true]));
+// echo json_encode($uploader->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT) . "\n";
+// echo json_encode($uploader->rename('cheesecake','my_cheesecake',['overwrite'=>true]),JSON_PRETTY_PRINT) . "\n";
 
 # Remove an asset
 
 # Upload API: destroy
-// print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
-// print_r($uploader->destroy('lake',['invalidate'=>true]));
+// echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT) . "\n";
+// echo json_encode($uploader->destroy('lake',['invalidate'=>true]),JSON_PRETTY_PRINT) . "\n";
 
 # Admin API: delete_resource
 # upload 2 assets and them remove them
 
-// print_r($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']));
-// print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
-// print_r($api->deleteResources(['dog','lake'],['invalidate'=>true]));
+// echo json_encode($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']),JSON_PRETTY_PRINT)  . "\n";
+// echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT)  . "\n";
+// echo json_encode($api->deleteResources(['dog','lake'],['invalidate'=>true]),JSON_PRETTY_PRINT)  . "\n";
 
 
 # Tag on Upload
 # by string with comma-separated tags
-//  print_r($uploader->upload('./assets/blackberry.jpg',['public_id'=>'blackberry','tags'=>'fruit,berries']));
-//  print_r($api->resourcesByTag('berries',['tags'=>true]));
+//  echo json_encode($uploader->upload('./assets/blackberry.jpg',
+//     ['public_id'=>'blackberry','tags'=>'fruit,berries']),JSON_PRETTY_PRINT)  . "\n";
+//  echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 
 # Tag after Upload
 
-// print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
-// print_r($uploader->addTag('water','lake'));
-// print_r($api->resourcesByTag('water',['tags'=>true]));
+// echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT)  . "\n";
+// echo json_encode($uploader->addTag('water','lake'),JSON_PRETTY_PRINT)  . "\n";
+// echo json_encode($api->resourcesByTag('water',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 
 # Remove a single tag by name; search by removed tag and unremoved tag
 
-// print_r($uploader->removeTag('berries','blackberry'));
-// print_r($api->resourcesByTag('berries',['tags'=>true]));
-// print_r($api->resourcesByTag('fruit',['tags'=>true]));
+// echo json_encode($uploader->removeTag('berries','blackberry'),JSON_PRETTY_PRINT)  . "\n";
+// echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
+# other tag still finds resource
+// echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 
 # bug that prevents remove all tags from working with multiple public ids
 # Issue SNI-3692 - PHP SDK2 Upload API removeAllTags only works with 1 public id has been successfully created.
 # Remove all tags list of public ids to remove tags
-// print_r($uploader->removeAllTags('blackberry'));
-// print_r($api->resourcesByTag('fruit',['tags'=>true]));
-//print_r($api->resourcesByTag('water',['tags'=>true]));
-
+// echo json_encode($uploader->removeAllTags('blackberry'),JSON_PRETTY_PRINT)  . "\n";
+// echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";

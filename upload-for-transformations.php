@@ -24,6 +24,8 @@ print_r($uploader->upload('./assets/face.jpg',['public_id'=>'face'])["public_id"
 echo "\n";
 print_r($uploader->upload('./assets/faces.jpg',['public_id'=>'faces'])["public_id"]);
 echo "\n";
+print_r($uploader->upload('./assets/grapes.png',['public_id'=>'grapes'])["public_id"]);
+echo "\n";
 print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake'])["public_id"]);
 echo "\n";
 print_r($uploader->upload('./assets/logo.png',['public_id'=>'logo'])["public_id"]);
@@ -32,7 +34,7 @@ print_r($uploader->upload('./assets/video.mp4',['public_id'=>'video','resource_t
 echo "\n";
 print_r($uploader->upload('./assets/shirt_only.png',['public_id'=>'shirt_only'])["public_id"]);
 echo "\n";
-print_r($uploader->upload('https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg',['public_id'=>'cookies'])["public_id"]);
+print_r($uploader->upload('./assets/cookies.jpg',['public_id'=>'cookies'])["public_id"]);
 echo "\n";
 print_r($uploader->upload('./assets/working.jpg',['public_id'=>'working'])["public_id"]);
 echo "\n";

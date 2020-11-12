@@ -27,16 +27,16 @@ use Cloudinary\Transformation\Position;
 # Constructor
 # $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 $cloudinary = new Cloudinary();
-print_r($cloudinary->configuration->account->cloudName);
-echo "\n";
+echo $cloudinary->configuration->account->cloudName  . "\n";
+
 
 # Radius - generate a cirucle for 1:1 aspect ratio and png format
 
-// echo ($cloudinary->image('dog')
+// echo $cloudinary->image('dog')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->roundCorners(CornerRadius::max())
 //   ->format(Format::png())
-//   ->quality(Quality::auto()) . "\n");
+//   ->quality(Quality::auto()) . "\n";
 
 # Borders
 # '10px_solid_rgb:bde4fb'
@@ -57,16 +57,17 @@ echo "\n";
 //   ->format(Format::auto()) . "\n");
 
 # Effect
-
 # Outline transparent
-// echo ($cloudinary->image('blackberry')
-//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+
+// echo ($cloudinary->image('grapes')
+//   ->resize(Resize::scale(300))
 //   ->effect(Effect::outline(15) -> color(Color::ORANGE))
 //   ->quality(Quality::auto())
 //   ->format(Format::png()) . "\n");
 
 
 # Improve color, contrast, light
+
 // echo ($cloudinary->image('blackberry')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->effect(Improve::OUTDOOR())
@@ -102,24 +103,20 @@ echo "\n";
 
 
 # tint
-// use Cloudinary\Transformation\ImageAdjustmentTrait;
-
 // echo ($cloudinary->image('face')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->effect(Effect::grayscale())
 //   ->quality(Quality::auto())
 //   ->format(Format::auto()) . "\n");
 
+# grayscale
 // echo ($cloudinary->image('face')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->adjust(Adjust::tint(40, Color::MAGENTA))
 //   ->quality(Quality::auto())
 //   ->format(Format::auto()) . "\n");
 
-# try different colors and intensities
-
-
-# duotone
+# duotone = grayscale + tint in chained transformation
 # experiment with color and amount
 // echo ($cloudinary->image('face')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
@@ -142,7 +139,6 @@ echo "\n";
 //       ->fontWeight(FontWeight::BOLD) //weight is optional
 //       ->effect(Effect::colorize()->color(Color::YELLOW))
 //       ->effect(Effect::outline(5) -> color(Color::ORANGE)
-//       //// ->background(Color::WHITE)//how to add background to text?
 //   ),
 //     Position::northWest()->x(10)->y(10)
 //   )
@@ -177,7 +173,6 @@ echo "\n";
 //       ->effect(Effect::outline(5) -> color(Color::GREEN))
 //       //// ->background(Color::WHITE)//how to add background to text?
 //     ,
-    
 //     Position::northWest()->x(10)->y(10)
 //   )
 // ). "\n";

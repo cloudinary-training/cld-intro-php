@@ -5,53 +5,50 @@ use Cloudinary\Cloudinary;
 
 // Config with Constructor
 $cloudinary = new Cloudinary();
-print_r($cloudinary->configuration->account->cloudName);
-echo "\n";
+echo $cloudinary->configuration->account->cloudName . "\n";
 
 # Reference the upload API
-// $uploader = $cloudinary->uploadApi();
+$uploader = $cloudinary->uploadApi();
 
 # Upload
 
 // Upload an image and supply a public id of 20 random characters
 // image is the default
-// print_r($uploader->upload('./assets/cheesecake.jpg'));
+// echo json_encode($uploader->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT) . "\n";
 
 // Video
-// print_r($uploader->upload('./assets/video.mp4',['resource_type'=>'video']));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/video.mp4',['resource_type'=>'video']),JSON_PRETTY_PRINT). "\n";
 
 // Raw
-// print_r($uploader->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']),JSON_PRETTY_PRINT). "\n";
+
 
 // auto
-// print_r($uploader->upload('./assets/video.mp4',['resource_type'=>'auto']));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/video.mp4',['resource_type'=>'auto']),JSON_PRETTY_PRINT). "\n";
+
 
 // Assign public_id
-// print_r($uploader->upload('./assets/face.jpg',['public_id'=>'face']));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/face.jpg',['public_id'=>'face']),JSON_PRETTY_PRINT) . "\n";
+
 
 // Use filename, unique
-// print_r($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]),JSON_PRETTY_PRINT) . "\n";
+
 
 // Use filename, not unique
-// print_r($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>false]));
-// echo "\n";
+echo json_encode($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>false]),JSON_PRETTY_PRINT) . "\n";
+
 
 // Specify folder name
-// print_r($uploader->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']),JSON_PRETTY_PRINT) . "\n";
+
 
 // Let Cloudinary create folder on the fly from public id
-// print_r($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']));
-// echo "\n";
+// echo json_encode($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']),JSON_PRETTY_PRINT) . "\n";
 
 // Remote asset upload from remote (https)
-// print_r($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'));
-// echo "\n";
+// echo json_encode($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'),JSON_PRETTY_PRINT) . "\n";
+
 
 
 
