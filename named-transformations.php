@@ -89,7 +89,8 @@ $api = $cloudinary->adminApi();
 // ->toUrl() . "\n";
 
 # create a named transformation for the complex transformation
-// print_r($api->createTransformation('tshirt','l_logo/c_scale,w_300/e_brightness:-21/r_max/fl_layer_apply,g_center,x_-10,y_-200/l_text:Coustard_100_bold:Hello Jon/c_scale,w_365/o_70/co_rgb:999999,e_colorize/fl_layer_apply,g_center,x_-10/f_auto'));
+// echo json_encode($api->createTransformation('tshirt4',
+// 'l_logo/c_scale,w_300/e_brightness:-21/r_max/fl_layer_apply,g_center,x_-10,y_-200/l_text:Coustard_100_bold:Hello Jon/c_scale,w_365/o_70/co_rgb:999999,e_colorize/fl_layer_apply,g_center,x_-10/f_auto')) . "\n";
 
 # using named transform with f_auto: chain
 // echo $cloudinary->image('shirt_only.png')
