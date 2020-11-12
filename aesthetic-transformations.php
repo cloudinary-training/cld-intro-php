@@ -98,8 +98,7 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 // -> roundCorners(CornerRadius::max())
 // -> effect(Effect::outline(100) -> color(Color::orange()))
 // -> background(Color::lightblue())
-// -> resize(Resize::scale() -> height(300))
-// ->toUrl() . "\n";
+// -> resize(Resize::scale() -> height(300)) . "\n";
 
 
 # tint

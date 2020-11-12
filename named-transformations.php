@@ -37,8 +37,7 @@ $api = $cloudinary->adminApi();
 # using named transform with f_auto: chain
 // echo $cloudinary->image('cheesecake')
 // ->namedTransformation('standard') 
-// ->format(Format::auto())
-// ->toUrl() . "\n";
+// ->format(Format::auto()) . "\n";
 
 # build out the transformation in code
 
@@ -85,8 +84,7 @@ $api = $cloudinary->adminApi();
 //       ->effect(Effect::colorize()->color(Color::rgb('#999999'))
 //   ),
 //     Position::center()->x(-10),
-//    ) 
-// ->toUrl() . "\n";
+//    )  . "\n";
 
 # create a named transformation for the complex transformation
 // echo json_encode($api->createTransformation('tshirt4',
@@ -95,8 +93,7 @@ $api = $cloudinary->adminApi();
 # using named transform with f_auto: chain
 // echo $cloudinary->image('shirt_only.png')
 // ->namedTransformation('tshirt') 
-// ->format(Format::auto())
-// ->toUrl() . "\n";
+// ->format(Format::auto()) . "\n";
 
 
 

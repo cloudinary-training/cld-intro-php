@@ -33,24 +33,24 @@ $api = new AdminApi();
 
 # Upload an image and supply a public id of 20 random characters
 # image is the default
-// print_r((new UploadApi())->upload('./assets/cheesecake.jpg'));
+// echo json_encode ,JSON_PRETTY_PRINT). "\n";
+// echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). "\n";
 // or
-// print_r($upload->upload('./assets/cheesecake.jpg'));
+// echo json_encode($upload->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). "\n";
 
 // Admin API
-// print_r((new UploadApi())->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']));
-// // print_r((new AdminApi())->resource("cheesecake")); 
-// // or
-// print_r($api->resource("cheesecake"));
+// echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT). "\n";
+// echo json_encodent_r((new AdminApi())->resource("cheesecake"),JSON_PRETTY_PRINT). "\n";
+// or
+// echo json_encode($api->resource("cheesecake"),JSON_PRETTY_PRINT). "\n";
 
 // Transformation
 // can use array keyword or symbol
-// echo (Media::fromParams("lake", array("transformation"=>array(
+// echo Media::fromParams("lake", array("transformation"=>array(
 //   array("effect"=>"cartoonify"),
 //   array("radius"=>"max"),
 //   array("background"=>"lightblue"),
-//   array("height"=>300, "crop"=>"scale")
-//   )))->toUrl()) . "\n";
+//   array("height"=>300, "crop"=>"scale")))) . "\n";
 
 // echo (Media::fromParams("lake", 
 // ["transformation"=>
