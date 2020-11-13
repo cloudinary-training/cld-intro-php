@@ -1,8 +1,6 @@
-# Cloudinary Intro using PHP #
+# Cloudinary Intro using PHP
 
-
-
-https://cloudinary.com/documentation/sdks/php/Cloudinary/Cloudinary.html
+We will be covering these topics in this course.
 
 * Upload
 * Presets
@@ -14,6 +12,7 @@ https://cloudinary.com/documentation/sdks/php/Cloudinary/Cloudinary.html
 * Named Transformations
 * Singleton
 
+## Install PHP
 
 ### Mac
 Mac comes with PHP installed.
@@ -38,10 +37,10 @@ curl -s https://getcomposer.org/installer | php sudo mv ./composer.phar /usr/loc
 Install Cloudinary via composer
 
 ```bash
-composer require cloudinary/cloudinary_php
+composer require "cloudinary/cloudinary_php:>2.0.0-beta"
  ```
 
-This will create a `composer.json` and `composer.lock`. You will need to set the current version for this which you can find [here](https://github.com/cloudinary/cloudinary_php/releases).  In the example below, we are using the beta7 version.
+This will create a `composer.json` and `composer.lock`. You can find the current version for this which you can find [here](https://github.com/cloudinary/cloudinary_php/releases).  In the example below, we are using the beta7 version.
 
 ```js
 {
@@ -53,7 +52,7 @@ This will create a `composer.json` and `composer.lock`. You will need to set the
 
 ## Config
 
-There are 2 ways you get an instance of the Cloudinary object, and I'll refer to them as "Constructor" and "Singleton".  The "Singleton" provides a single instance of a Cloudinary object configured for a single cloud.  It behaves similar to PHP SDK 1 and is provided to help with migration and the transition from SDK 1 to SDK 2.  The "Constructor" allows you to create multiple Cloudinary objects that can refer to different clouds.  If you are writing new code to take advantage of SDK 2 you will use the "Constructor".  The scripts used in this training will take advantage of SDK 2 functionality by using the "Constructor" and we will cover singleton functionality in the script `singleton.php` at the end of this course.
+There are 2 ways you get an instance of the Cloudinary object, and we'll refer to them as "Constructor" and "Singleton".  The "Singleton" provides a single instance of a Cloudinary object configured for a single cloud.  It behaves similar to PHP SDK 1 and is provided to help with migration and the transition from SDK 1 to SDK 2.  The "Constructor" allows you to create multiple Cloudinary objects that can refer to different clouds.  If you are writing new code to take advantage of SDK 2 you will use the "Constructor".  The scripts used in this training will take advantage of SDK 2 functionality by using the "Constructor" and we will cover singleton functionality in the script `singleton.php` at the end of this course.
 
 For both methods of Config, you can export your Cloudinary URL to provide your credentials. For the "Constructor", you would then call the `config` function to read those credentials in.  For the "Singleton" you don't need to make that call but you can if you want access to any of the information in your code.
 
@@ -113,14 +112,13 @@ export CLOUDINARY_URL=cloudinary://API_KEY:API_SECRET@CLOUD_NAME
 *Alternative:* Credentials in Code
 
 ```php
-// only for migration
 use Cloudinary\Configuration\Configuration;
 Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'key' => 'API_KEY', 'secret' => 'API_SECRET']]);
 ```
 
 ## Exercises
 You will see that the images and video to be used in the exercises are in the `assets` directory.
-And we will be using `echo` or `print_r` to display the return value or array.
+And we will be using `echo` or `print_r` to display the return value or array. We'll use JSON output for SDK function results.
 
 ## Upload
 
@@ -141,22 +139,22 @@ $uploader = $cloudinary->uploadApi();
 Upload an image and supply a public id of 20 random characters
 
 ```php
-print_r($uploader->upload('./assets/cheesecake.jpg'));
+echo json_encode($uploader->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT) . "\n";
 ```
 
 ### video
 ```php
-print_r($uploader->upload('./assets/video.mp4',['resource_type'=>'video']));
+echo json_encode($uploader->upload('./assets/video.mp4',['resource_type'=>'video']),JSON_PRETTY_PRINT). "\n";
 ```
 
 ### raw
 ```php
-print_r($uploader->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']));
+echo json_encode($uploader->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']),JSON_PRETTY_PRINT). "\n";
 ```
 
 ### auto
 ```php
-print_r($uploader->upload('./assets/video.mp4',['resource_type'=>'auto']));
+echo json_encode($uploader->upload('./assets/video.mp4',['resource_type'=>'auto']),JSON_PRETTY_PRINT). "\n";
 ```
 
 ### upload options
@@ -167,27 +165,27 @@ print_r($uploader->upload('./assets/face.jpg',['public_id'=>'face']));
 
 #### Use filename, unique
 ```php
-print_r($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]));
+echo json_encode($uploader->upload('./assets/face.jpg',['public_id'=>'face']),JSON_PRETTY_PRINT) . "\n";
 ```
 
 ### Use filename, not unique
 ```php
-print_r($cloudinary->uploadApi()->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>false]));
+echo json_encode($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]),JSON_PRETTY_PRINT) . "\n";
 ```
 
 ### Specify folder name
 ```php
-print_r($uploader->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']));
+echo json_encode($uploader->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']),JSON_PRETTY_PRINT) . "\n";
 ```
 
 ### Let Cloudinary create folder on the fly from public id
 ```php
-print_r($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']));
+echo json_encode($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']),JSON_PRETTY_PRINT) . "\n";
 ```
 
 ### Remote asset upload from remote (https)
 ```php
-print_r($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'));
+echo json_encode($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'),JSON_PRETTY_PRINT) . "\n";
 ```
 
 ## Preset
@@ -213,18 +211,22 @@ use Cloudinary\Cloudinary;
 We're adding a tag and limiting formats that can be uploaded.
 
 ```php
-print_r($api->createUploadPreset([
+echo json_encode($api->createUploadPreset([
   'name'              => 'unsigned-preset',
   'unsigned'          => true,
   'tags'              => 'unsigned',
   'allowed_formats'   => 'jpg,png',
-]));
+]),JSON_PRETTY_PRINT) . "\n";
 ```
 
 #### Use Un-Signed Preset in Upload
 ```php
-print_r($uploader->upload('./assets/logo.png',['upload_preset'=>'unsigned-preset']));
+echo json_encode($uploader->upload('./assets/logo.png',
+  ['upload_preset'=>'unsigned-preset']), JSON_PRETTY_PRINT) . "\n";
 ```
+## Use Un-Signed Preset in web page
+
+Add your cloud name to the index.html to try out the Upload Widget with the unsigned preset you created.
 
 ### Signed Preset
 Use the signed preset for backend scripts with access to API_SECRET credentials.  If you want to use a preset in the DAM it must be signed.
@@ -235,18 +237,20 @@ Add your cloud name and preset name to the index.html and use the upload widget 
 #### Create Signed Preset
 We're adding a tag and limiting formats that can be uploaded.
 ```php
-print_r($api->createUploadPreset([
-    'name'              => 'signed-preset',
-    'unsigned'          => false,
-    'tags'              => 'signed',
-    'allowed_formats'   => 'jpg,png',
-]));
+echo json_encode($api->createUploadPreset([
+  'name'              => 'signed-preset',
+  'unsigned'          => false,
+  'tags'              => 'signed',
+  'allowed_formats'   => 'jpg,png',
+]),JSON_PRETTY_PRINT) . "\n";
 ```
 
 #### Use Signed Preset 
 
 ```php
-print_r($uploader->upload('./assets/lake.jpg',['upload_preset'=>'signed-preset']));
+echo json_encode($uploader->upload('./assets/lake.jpg',
+  ['upload_preset'=>'signed-preset']),
+  JSON_PRETTY_PRINT) . "\n";
 ```
 
 ## Auto-upload and Fetch
@@ -264,13 +268,17 @@ Fetch lets you load an asset by specifying the remote URL with a "fetch" deliver
 use Cloudinary\Cloudinary;
 use Cloudinary\Asset\DeliveryType;
 use Cloudinary\Transformation\Resize;
-
+use Cloudinary\Asset;
 ```
+
+### Fetch
+
+Fetch a remote image.
 
 ```php 
 // pattern
 echo $cloudinary->image('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg')
-  ->deliveryType(\Cloudinary\Asset\DeliveryType::FETCH) . "\n";
+  ->deliveryType(DeliveryType::FETCH) . "\n";
 ```
 
 ### Auto-upload
@@ -283,14 +291,12 @@ We use the URL helper in the Ruby SDK to create a URL.
 ### Auto-upload Image with Cropping
 
 ```php
-echo $cloudinary->image('remote-media/images/dolphin')
-  ->resize(Resize::scale()->width(300)) . "\n";
+echo $cloudinary->image('remote-media/images/dolphin') . "\n";
 ```
 ### Auto-upload Video with Cropping
 
 ```php
-echo $cloudinary->video('remote-media/video/snowboarding')
-  ->resize(Resize::scale()->width(300)) . "\n";
+echo $cloudinary->video('remote-media/video/snowboarding') . "\n";
 ```
 
 ### Auto-upload Raw
@@ -316,26 +322,25 @@ $api = new \Cloudinary\Api();
 
 ### List all assets (default is 10)
 ```php
-print_r($api->resources());
+echo json_encode($api->resources(),JSON_PRETTY_PRINT) . "/n";
 ```
 
 ### List up to 500 assets
 ```php
-print_r($api->resources(['max_results'=>500]));
+echo json_encode($api->resources(['max_results'=>500]),JSON_PRETTY_PRINT) . "/n";
 ```
 
 ###  Search by prefix (public id "starts with")
 ```php
-print_r($api->resources(['type'=>'upload','prefix'=>'sample']));
+echo json_encode($api->resources(['type'=>'upload','prefix'=>'sample']),JSON_PRETTY_PRINT)  . "\n";
 ```
 
 ### Rename an asset default overwrite is false
 ### Re-upload cheesecake if needed 
 
 ```php
-print_r($uploader->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']));
-print_r($uploader->rename('cheesecake','my_cheesecake',['overwrite'=>true]));
-// 
+echo json_encode($uploader->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->rename('cheesecake','my_cheesecake',['overwrite'=>true]),JSON_PRETTY_PRINT) . "\n";
 ```
 
 ### Remove an asset
@@ -348,8 +353,8 @@ Use `invalide:true` to remove from CDN.  May take some time depending on CDN.  Y
 #### load a file to delete, invalidate is false by default, doesn't remove derived
 
 ```php
-print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
-print_r($uploader->destroy('lake',['invalidate'=>true]));
+echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->destroy('lake',['invalidate'=>true]),JSON_PRETTY_PRINT) . "\n";
 ```
 
 #### Admin API: `delete_resource`
@@ -357,42 +362,41 @@ You can remove multiple assets at a time with the Admin API.  There is a daily q
 
 ```php
 # upload 2 assets and them remove them
-print_r($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']));
-print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
-print_r($api->deleteResources(['dog','lake'],['invalidate'=>true]));
+echo json_encode($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($api->deleteResources(['dog','lake'],['invalidate'=>true]),JSON_PRETTY_PRINT)  . "\n";
 ```
 
 ### Tag on Upload
 You can supply tags and other metadata like Context on upload.  You can then find assets by tag.
 
 ```php
-print_r($uploader->upload('./assets/blackberry.jpg',['public_id'=>'blackberry','tags'=>'fruit,berries']));
-
-print_r($api->resourcesByTag('berries',['tags'=>true]));
+ echo json_encode($uploader->upload('./assets/blackberry.jpg',
+    ['public_id'=>'blackberry','tags'=>'fruit,berries']),JSON_PRETTY_PRINT)  . "\n";
+ echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 ```
 
 ### Tag after upload 
 You can add tags to assets that are already in the Media Library.  You can also include an option, `tags:true` to show all tags per asset found in the result.
 
 ```php
-print_r($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']));
-print_r($uploader->addTag('water','lake'));
-print_r($api->resourcesByTag('water',['tags'=>true]));
+echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($uploader->addTag('water','lake'),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($api->resourcesByTag('water',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 ```
 
 ### Remove a single tag by name; search by removed tag and un-removed tag
 
 ```php
-print_r($uploader->removeTag('berries','blackberry'));
-print_r($api->resourcesByTag('berries',['tags'=>true]));
-print_r($api->resourcesByTag('fruit',['tags'=>true]));
+echo json_encode($uploader->removeTag('berries','blackberry'),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
+# other tag still finds resource
+echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 ```
-### -------?????
 ### Remove all tags list of public ids to remove tags
 ```php
-print_r($uploader->removeAllTags(['blackberry','lake']));
-print_r($api->resourcesByTag('fruit',['tags'=>true]));
-print_r($api->resourcesByTag('water',['tags'=>true]));
+echo json_encode($uploader->removeAllTags('blackberry'),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 ```
 
 ## Upload for Transformations
@@ -451,7 +455,8 @@ echo ($cloudinary->image('cheesecake')->resize(Resize::scale(300)) . "\n");
 ```
 If you add a second dimension with the `scale` crop mode, it may skew the image depending the image's original aspect ratio.
 ```php
-echo cloudinary_url('cheesecake',['transformation'=>['width'=>300,'height'=>300,'crop'=>'scale']]);
+echo ($cloudinary->image('cheesecake')->resize(Resize::scale(300,400)) . "\n");
+echo ($cloudinary->image('cheesecake')->resize(Resize::scale()->width(300)->height(400)) . "\n");
 ```
 
 #### fit: Applying 2 dimensions to a crop mode without skew
@@ -465,8 +470,10 @@ echo ($cloudinary->image('cheesecake')->resize(Resize::fit()->width(300)->height
 
 ```
 
-#### pad: Apply 2 dimensions with no skew 
+#### fit and pad: Apply 2 dimensions with no skew
 ```php
+echo ($cloudinary->image('cheesecake')->resize(Resize::fit()->width(300)->height(400)) . "\n");
+
 echo ($cloudinary->image('cheesecake')->resize(Resize::pad()->width(300)->height(400)) . "\n");
 ```
 
@@ -477,7 +484,6 @@ Gravity provides focus.  You can apply compass point gravity or let Cloudinary f
 Without gravity, all you see is a chunk of dog fur. 
 ```php
 echo ($cloudinary->image('dog')->resize(Resize::crop()->width(300)->height(300)) . "\n");
-
 ```
 
 #### Crop mode with gravity
@@ -488,6 +494,7 @@ echo ($cloudinary->image('dog')->resize(Resize::thumbnail(300,300,Gravity::auto(
 
 #### Crop with gravity:auto, fill vs fill-pad
 Not all crop types can use gravity, only: `crop`, `fill`, `lfill`, `fill_pad` or `thumb`
+
 ```php
 echo ($cloudinary->image('working')->resize(Resize::fill(400,400,Gravity::auto())) . "\n");
 
@@ -527,7 +534,7 @@ echo ($cloudinary->image('logo')->resize(Resize::thumbnail(100,100)) . "\n");
 
 ```
 
-### Compression
+### Compression using quality
 
 Compression is provided with the `quality` option.  You can specify a numeric value form 0-100 with 100 being the highest quality and the least compression.  You can also let Cloudinary determine the best quality with the least size by using `quality: auto`.  The is a recommended best practice.
 
@@ -553,25 +560,17 @@ In the example below we generate "auto everything"
 
 ```php
 // without auto format
-echo cloudinary_url('lake',[
-    'transformation'=>[
-        'height'=>400,
-        'crop'=>'fill',
-        'gravity'=>'auto',
-        'quality'=>'auto'
-    ]
-]);
+echo ($cloudinary->image('cookies')) . "\n");
 
 // with auto format
-echo cloudinary_url('lake',[
-    'transformation'=>[
-        'height'=>400,
-        'crop'=>'fill',
-        'gravity'=>'auto',
-        'quality'=>'auto',
-        'fetch_format'=>'auto'
-    ]
-]);
+echo ($cloudinary->image('cookies')->format(Format::auto()) . "\n");
+
+//with auto everything
+
+echo ($cloudinary->image('working')
+  ->resize(Resize::fill(300,400,Gravity::auto()))
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
 ```
 
 ## Aesthetic Transformations
@@ -641,8 +640,8 @@ echo ($cloudinary->image('face')
 Use the `effect` option. Set the width of the outline in pixels. 
 
 ```php
-echo ($cloudinary->image('blackberry')
-  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+echo ($cloudinary->image('grapes')
+  ->resize(Resize::scale(300))
   ->effect(Effect::outline(15) -> color(Color::ORANGE))
   ->quality(Quality::auto())
   ->format(Format::png()) . "\n");
@@ -667,6 +666,7 @@ echo ($cloudinary->image('lake')
   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
   ->effect(ArtisticFilter::zorro())
   ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
   
 ```
 
@@ -697,12 +697,29 @@ echo ($cloudinary->image('face')
 ##### "duotone"
 This is a chained transformation.  It instructs Cloudinary to run transformations in sequence.  First a grayscale is set and then the grayscale is tinted. It's coded as an array of transformation objects.  In the URL, you'll see the transformations separated by `/`.
 ```php
+# tint
+echo ($cloudinary->image('face')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(Effect::grayscale())
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
+
+# grayscale
+echo ($cloudinary->image('face')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->adjust(Adjust::tint(40, Color::MAGENTA))
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
+
+# duotone = grayscale + tint in chained transformation
+# experiment with color and amount
 echo ($cloudinary->image('face')
   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
   ->effect(Effect::grayscale())
   ->adjust(Adjust::tint(20, Color::MAGENTA))
   ->quality(Quality::auto())
   ->format(Format::auto()) . "\n");
+
 ```
 
 ### Overlays
@@ -712,11 +729,6 @@ echo ($cloudinary->image('face')
 
 #### Text over image
 Required options are font_family, font_size, and text.
-```php
-https://res.cloudinary.com/sep-2020-test/image/upload/c_thumb,g_faces,h_300,w_300/l_text:Arial_30_bold:Tutoring/co_yellow,e_colorize/co_orange,e_outline:5/fl_layer_apply,g_north_west,x_10,y_10/r_30/f_auto/faces
-```
-
-#### Text over image
 
 ```php
 echo ($cloudinary->image('faces')
@@ -728,15 +740,13 @@ echo ($cloudinary->image('faces')
       ->fontWeight(FontWeight::BOLD) //weight is optional
       ->effect(Effect::colorize()->color(Color::YELLOW))
       ->effect(Effect::outline(5) -> color(Color::ORANGE)
-      //// ->background(Color::WHITE)//how to add background to text?
   ),
     Position::northWest()->x(10)->y(10)
   )
   ->roundCorners(30)
   ->format(Format::auto()) . "\n");
 ```
-
-#### Image over Image
+#### Image over image
 
 ```php
 echo ($cloudinary->image('working')
@@ -749,22 +759,44 @@ echo ($cloudinary->image('working')
     Position::northEast()->x(10)->y(10)
   )
 ). "\n";
+```
+
+
+
 
 ```
 
 #### Text over video
 ```php
+
 echo ($cloudinary->video('video')
-  ->resize(Resize::scale(400))
-  ->overlay(
-    Source::image('logo')
-      ->resize(Resize::thumbnail(50, 50))
-      ->adjust(Adjust::opacity(30))
-    ,
-    Position::northEast()->x(10)->y(10)
-  )
+   ->resize(Resize::scale(300))
+   ->overlay(
+     Source::text('Earth')
+       ->fontFamily('Arial')
+       ->fontSize(30)
+       ->fontWeight(FontWeight::BOLD) //weight is optional
+       ->effect(Effect::colorize()->color(Color::BLUE))
+       ->effect(Effect::outline(5) -> color(Color::GREEN))
+       ->background(Color::WHITE)//how to add background to text?
+     ,
+     Position::northWest()->x(10)->y(10)
+   )
 ). "\n";
 ```
+
+#### Image over Video
+
+ echo ($cloudinary->video('video')
+   ->resize(Resize::scale(400))
+   ->overlay(
+     Source::image('logo')
+       ->resize(Resize::thumbnail(50, 50))
+       ->adjust(Adjust::opacity(30))
+     ,
+    Position::northEast()->x(10)->y(10)
+   )
+ ). "\n";
 
 ## Named Transformations
 You can create a transformation template by using named transformations.  They cleanup your URLs to make them better for SEO.  If you want to hide your transformations or underlying assets used in overlays, named transformations can help.
@@ -789,7 +821,7 @@ use Cloudinary\Transformation\Position;
 ```php
 // Create a new Admin API object:
 $api = $cloudinary->adminApi();
-
+# Create a simple named transformation from a string
 print_r($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'));
 ```
 
@@ -798,8 +830,7 @@ Notice that the named you use to create the named transformation gets prefixed w
 
 ```php
 echo $cloudinary->image('cheesecake')
-    ->namedTransformation('standard') 
-    ->toUrl();
+->namedTransformation('standard') . "\n";
 ```
 
 ### Use a named transformation with f_auto
@@ -809,10 +840,39 @@ You can't include `f_auto` in a named transformation because it is handled at th
 If the named transformation already exists you'll get an error letting your know.
 
 ```php
- echo $cloudinary->image('cheesecake')
-    ->namedTransformation('standard') 
-    ->format(Format::auto())
-    ->toUrl();
+echo $cloudinary->image('cheesecake')
+->namedTransformation('standard') 
+->format(Format::auto()) . "\n";
+```
+
+### Build out the transformation in code
+
+```php
+# code without a variable
+echo $cloudinary->image('face')
+->resize(Resize::thumbnail(300,300,Gravity::auto()))
+->effect(Effect::grayscale())
+->adjust(Adjust::tint(20, Color::MAGENTA));
+
+# create a variable
+$transformation = new Transformation();
+$transformation
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(Effect::grayscale())
+  ->adjust(Adjust::tint(20, Color::MAGENTA));
+
+# add the transformation to an image
+echo ($cloudinary->image('face') -> addTransformation($transformation)) . "\n";
+
+# create a named transformation for duotone
+echo json_encode($api->createTransformation('duotone',$transformation),JSON_PRETTY_PRINT) . "\n";
+
+# use the named transformation
+echo $cloudinary->image('face')
+->namedTransformation('duotone') . "\n";
+
+
+
 ```
 
 ### A super complex chained transformation
@@ -849,7 +909,9 @@ Don't include `f_auto`
 // Create a new Admin API object if you haven't from the previous one:
 $api = new \Cloudinary\Api();
 
-print_r($api->createTransformation('tshirt','l_logo/c_scale,w_300/e_brightness:-21/r_max/fl_layer_apply,g_center,x_-10,y_-200/l_text:Coustard_100_bold:Hello Jon/c_scale,w_365/o_70/co_rgb:999999,e_colorize/fl_layer_apply,g_center,x_-10/f_auto'));
+echo json_encode($api->createTransformation('tshirt4',
+'l_logo/c_scale,w_300/e_brightness:-21/r_max/fl_layer_apply,g_center,x_-10,y_-200/l_text:Coustard_100_bold:Hello Jon/c_scale,w_365/o_70/co_rgb:999999,e_colorize/fl_layer_apply,g_center,x_-10/f_auto')) . "\n";
+
 
 ```
 
@@ -859,8 +921,7 @@ We can add `f_auto` to it.
 ```php
 echo $cloudinary->image('shirt_only.png')
 ->namedTransformation('tshirt') 
-->format(Format::auto())
-->toUrl() 
+->format(Format::auto()) . "\n";
 ```
 ## Singleton
 
@@ -894,9 +955,11 @@ $api = new AdminApi();
 ### Upload API
 
 ```php
-print_r((new UploadApi())->upload('./assets/cheesecake.jpg'));
-// or
-print_r($upload->upload('./assets/cheesecake.jpg'));
+echo json_encode ,JSON_PRETTY_PRINT). "\n";
+echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). "\n";
+or
+echo json_encode($upload->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). "\n";
+
 
 ```
 
@@ -905,31 +968,33 @@ print_r($upload->upload('./assets/cheesecake.jpg'));
 Using the Admin API with a singleton.
 
 ```php
-print_r((new AdminApi())->resource("cheesecake")); 
-// or
-print_r($api->resource("cheesecake"));
+echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT). "\n";
+echo json_encodent_r((new AdminApi())->resource("cheesecake"),JSON_PRETTY_PRINT). "\n";
+or
+echo json_encode($api->resource("cheesecake"),JSON_PRETTY_PRINT). "\n";
 ```
+
 ### Use Media::fromParams to create a Transformation URL
 Specify the array using the keyword or symbol. This look like SDK 1 syntax.
 
 ```php
-echo (Media::fromParams("lake", array("transformation"=>array(
+echo Media::fromParams("lake", array("transformation"=>array(
   array("effect"=>"cartoonify"),
   array("radius"=>"max"),
   array("background"=>"lightblue"),
-  array("height"=>300, "crop"=>"scale")
-  )))->toUrl()) . "\n";
+  array("height"=>300, "crop"=>"scale")))) . "\n";
 
 echo (Media::fromParams("lake", 
 ["transformation"=>
   [
-    ["effect"=>"cartoonify"],
-    ["radius"=>"max"],
-    ["background"=>"lightblue"],
-    ["height"=>300, "crop"=>"scale"]
+    "effect"=>"cartoonify",
+    "radius"=>"max",
+    "background"=>"lightblue",
+    "height"=>300, "crop"=>"scale"
   ]
 ]) . "\n");
 ```
+
 ### Create an Image Tag from Params
 
 ```php
@@ -976,3 +1041,9 @@ echo (VideoTag::fromParams("video.jpg",
 ) . "\n");
 
 ```
+
+## Resources
+
+[PHP SDK2 Documentation](https://cloudinary.com/documentation/php2_integration)
+[PHP SDK2 Code Reference](https://cloudinary.com/documentation/sdks/php/Cloudinary/Cloudinary.html
+)

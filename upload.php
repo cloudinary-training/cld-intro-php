@@ -36,7 +36,7 @@ $uploader = $cloudinary->uploadApi();
 
 
 // Use filename, not unique
-echo json_encode($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>false]),JSON_PRETTY_PRINT) . "\n";
+// echo json_encode($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>false]),JSON_PRETTY_PRINT) . "\n";
 
 
 // Specify folder name

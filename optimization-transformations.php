@@ -77,17 +77,16 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 # Compression using quality
 // echo ($cloudinary->image('cookies') . "\n");
 // echo ($cloudinary->image('cookies')->quality(Quality::auto()). "\n");
-// echo ($cloudinary->image('cookies')->quality(Quality::auto())->format(Format::auto()) . "\n");
 
+
+# We use chaining for every action but there is no cost for each transformation
+// echo ($cloudinary->image('cookies')->format(Format::auto()) . "\n");
 
 # Auto everything: quality, format and gravity
-# We use chaining for every action but there is no cost for each transformation
-
-
 // echo ($cloudinary->image('working')
-  // ->resize(Resize::fill(300,400,Gravity::auto()))
-  // ->quality(Quality::auto())
-  // ->format(Format::auto()) . "\n");
+// ->resize(Resize::fill(300,400,Gravity::auto()))
+// ->quality(Quality::auto())
+// ->format(Format::auto()) . "\n");
 
 
 

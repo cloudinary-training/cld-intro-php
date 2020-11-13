@@ -48,17 +48,17 @@ $api = $cloudinary->adminApi();
 // ->adjust(Adjust::tint(20, Color::MAGENTA));
 
 # create a variable
-// $tranformation = new Transformation();
-// $tranformation
+// $transformation = new Transformation();
+// $transformation
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->effect(Effect::grayscale())
 //   ->adjust(Adjust::tint(20, Color::MAGENTA));
 
 # add the transformation to an image
-// echo ($cloudinary->image('face') -> addTransformation($tranformation)) . "\n";
+// echo ($cloudinary->image('face') -> addTransformation($transformation)) . "\n";
 
 # create a named transformation for duotone
-// echo json_encode($api->createTransformation('duotone',$tranformation),JSON_PRETTY_PRINT) . "\n";
+// echo json_encode($api->createTransformation('duotone',$transformation),JSON_PRETTY_PRINT) . "\n";
 
 # use the named transformation
 //   echo $cloudinary->image('face')

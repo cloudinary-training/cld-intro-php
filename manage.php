@@ -17,7 +17,6 @@ $api = $cloudinary->adminApi();
 // echo json_encode($api->resources(),JSON_PRETTY_PRINT) . "/n";
 
 # List up to 500 assets
-// echo json_encode ,JSON_PRETTY_PRINT);
 // echo json_encode($api->resources(['max_results'=>500]),JSON_PRETTY_PRINT) . "/n";
 
 # Search by prefix (public id "starts with")

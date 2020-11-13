@@ -11,8 +11,6 @@ use Cloudinary\Asset;
 $cloudinary = new Cloudinary();
 echo $cloudinary->configuration->account->cloudName . "\n";
 
-// Alias the upload API
-$uploader = $cloudinary->uploadApi();
 
 // Fetch
 // echo $cloudinary->image('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg')
