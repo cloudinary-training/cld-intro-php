@@ -1,5 +1,19 @@
 # Cloudinary Intro using PHP
 
+The Cloudinary PHP SDK is Class based.  This means that your IDE can provide help learning the language.  With Intellisense, you can discover Classes, functions, constants, and enumerated types.
+Here are some suggestions for IDE's that can help with PHP Intellisense:
+
+* PHP Storm
+* Netbeans
+* Aptana Studio
+* Eclipse
+* Visual Studio with Extensions Intelephense or PHP Intellisense
+* ZendStudio
+
+You can also browse the [Namespace Reference](https://cloudinary.com/documentation/sdks/php/index) to better understand the SDK's structure.
+
+
+## Topics
 We will be covering these topics in this course.
 
 * Upload
@@ -57,6 +71,13 @@ There are 2 ways you get an instance of the Cloudinary object, and we'll refer t
 For both methods of Config, you can export your Cloudinary URL to provide your credentials. For the "Constructor", you would then call the `config` function to read those credentials in.  For the "Singleton" you don't need to make that call but you can if you want access to any of the information in your code.
 
 You can also provide the credentials in the code.  For this training, we'll export the credentials and in code we'll call `config` and output the cloud we're using for verification.
+
+### Credentials
+There are multiple ways that you can supply your Cloudinary credentials. In this course, we'll place the Cloudinary URL in a .env file with an export command.  The .env file is gitignore'd so there is no chance of accidentally checking it in.  With the .env file setup, you can load the current session with the Cloudinary URL from the root folder of the project.
+
+```bash
+. ./.env
+```
 
 ### Constructor 
 

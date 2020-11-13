@@ -170,7 +170,6 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 //       ->fontWeight(FontWeight::BOLD) //weight is optional
 //       ->effect(Effect::colorize()->color(Color::BLUE))
 //       ->effect(Effect::outline(5) -> color(Color::GREEN))
-//       //// ->background(Color::WHITE)//how to add background to text?
 //     ,
 //     Position::northWest()->x(10)->y(10)
 //   )
