@@ -67,11 +67,11 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 
 # Improve color, contrast, light
 
-// echo ($cloudinary->image('blackberry')
-//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//   ->effect(Improve::OUTDOOR())
-//   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
+echo ($cloudinary->image('blackberry')
+  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+  ->effect(Improve::OUTDOOR())
+  ->quality(Quality::auto())
+  ->format(Format::auto()) . "\n");
 
 
 # Art filters
@@ -100,14 +100,14 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 // -> resize(Resize::scale() -> height(300)) . "\n";
 
 
-# tint
+# grayscale
 // echo ($cloudinary->image('face')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->effect(Effect::grayscale())
 //   ->quality(Quality::auto())
 //   ->format(Format::auto()) . "\n");
 
-# grayscale
+# tint
 // echo ($cloudinary->image('face')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->adjust(Adjust::tint(40, Color::MAGENTA))

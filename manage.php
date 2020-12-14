@@ -63,8 +63,6 @@ $api = $cloudinary->adminApi();
 # other tag still finds resource
 // echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 
-# bug that prevents remove all tags from working with multiple public ids
-# Issue SNI-3692 - PHP SDK2 Upload API removeAllTags only works with 1 public id has been successfully created.
 # Remove all tags list of public ids to remove tags
 // echo json_encode($uploader->removeAllTags('blackberry'),JSON_PRETTY_PRINT)  . "\n";
 // echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
