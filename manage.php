@@ -14,10 +14,10 @@ $api = $cloudinary->adminApi();
 
 # List all assets (default is 10)
 
-// echo json_encode($api->resources(),JSON_PRETTY_PRINT) . "/n";
+// echo json_encode($api->resources(),JSON_PRETTY_PRINT) . "\n";
 
 # List up to 500 assets
-// echo json_encode($api->resources(['max_results'=>500]),JSON_PRETTY_PRINT) . "/n";
+// echo json_encode($api->resources(['max_results'=>500]),JSON_PRETTY_PRINT) . "\n";
 
 # Search by prefix (public id "starts with")
 
@@ -44,8 +44,10 @@ $api = $cloudinary->adminApi();
 
 # Tag on Upload
 # by string with comma-separated tags
-//  echo json_encode($uploader->upload('./assets/blackberry.jpg',
-//     ['public_id'=>'blackberry','tags'=>'fruit,berries']),JSON_PRETTY_PRINT)  . "\n";
+//  echo json_encode($uploader->upload('./assets/blackberry.jpg', [
+//         'public_id' => 'blackberry',
+//         'tags'      => 'fruit,berries'
+//      ]),JSON_PRETTY_PRINT)  . "\n";
 //  echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
 
 # Tag after Upload
