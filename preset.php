@@ -42,4 +42,4 @@ $api = $cloudinary->adminApi();
 // echo json_encode($uploader->upload('./assets/lake.jpg',
 //   ['upload_preset'=>'signed-preset']),
 //   JSON_PRETTY_PRINT) . "\n";
-
+?>

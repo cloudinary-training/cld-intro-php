@@ -25,3 +25,4 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 
 // Auto-upload Raw no transformations on raw
 // echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
+?>

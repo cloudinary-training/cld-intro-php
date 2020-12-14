@@ -187,10 +187,4 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 //     Position::northEast()->x(10)->y(10)
 //   )
 // ). "\n";
-
-
-
-
-
-
-
+?>

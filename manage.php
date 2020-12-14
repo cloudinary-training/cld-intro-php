@@ -66,3 +66,4 @@ $api = $cloudinary->adminApi();
 # Remove all tags list of public ids to remove tags
 // echo json_encode($uploader->removeAllTags('blackberry'),JSON_PRETTY_PRINT)  . "\n";
 // echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
+?>

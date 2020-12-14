@@ -38,3 +38,4 @@ print_r($uploader->upload('./assets/cookies.jpg',['public_id'=>'cookies'])["publ
 echo "\n";
 print_r($uploader->upload('./assets/working.jpg',['public_id'=>'working'])["public_id"]);
 echo "\n";
+?>

@@ -118,6 +118,4 @@ $api = new AdminApi();
 //     "height"=>300, "crop"=>"scale"
 //   ]
 // ]) . "\n");
-
-
-
+?>

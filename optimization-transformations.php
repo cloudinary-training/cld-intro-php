@@ -87,8 +87,4 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 // ->resize(Resize::fill(300,400,Gravity::auto()))
 // ->quality(Quality::auto())
 // ->format(Format::auto()) . "\n");
-
-
-
-
-
+?>

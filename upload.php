@@ -48,7 +48,4 @@ $uploader = $cloudinary->uploadApi();
 
 // Remote asset upload from remote (https)
 // echo json_encode($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'),JSON_PRETTY_PRINT) . "\n";
-
-
-
-
+?>

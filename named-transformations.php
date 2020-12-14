@@ -94,6 +94,4 @@ $api = $cloudinary->adminApi();
 // echo $cloudinary->image('shirt_only.png')
 // ->namedTransformation('tshirt') 
 // ->format(Format::auto()) . "\n";
-
-
-
+?>
