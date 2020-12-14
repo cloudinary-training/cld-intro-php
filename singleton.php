@@ -19,12 +19,12 @@ use Cloudinary\Tag\VideoTag;
 // Singleton - can't use for aliasing
 // $config = Configuration::instance(['account' => ['cloud_name' => 'CLOUD_NAME', 'api_key' => 'API_KEY', 'api_secret' => 'API_SECRET']]);
 
-// or 
-// in terminal export CLOUDINARY_URL=""
-$config = Configuration::instance();
+// or just export CLOUDINARY_URL
 
+// if you want to access account infromation
+// $config = Configuration::instance();  
 // verify config
-echo $config->account->cloudName . "\n";
+// echo $config->account->cloudName . "\n";
 
 
 // use variable reference
