@@ -51,7 +51,6 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 
 // echo ($cloudinary->image('face')
 //   ->resize(Resize::pad(300,200,Background::auto())
-//   ->gravity(Gravity::south()))
 //   ->border(Border::solid()->width(10)->color(Color::WHITE))
 //   ->quality(Quality::auto())
 //   ->format(Format::auto()) . "\n");
