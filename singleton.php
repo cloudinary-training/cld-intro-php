@@ -33,16 +33,16 @@ $api = new AdminApi();
 
 # Upload an image and supply a public id of 20 random characters
 # image is the default
-// echo json_encode ,JSON_PRETTY_PRINT). "\n";
-// echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). "\n";
+// echo json_encode ,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
+// echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 // or
-// echo json_encode($upload->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). "\n";
+// echo json_encode($upload->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 
 // Admin API
-// echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT). "\n";
-// echo json_encodent_r((new AdminApi())->resource("cheesecake"),JSON_PRETTY_PRINT). "\n";
+// echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
+// echo json_encodent_r((new AdminApi())->resource("cheesecake"),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 // or
-// echo json_encode($api->resource("cheesecake"),JSON_PRETTY_PRINT). "\n";
+// echo json_encode($api->resource("cheesecake"),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 
 // Transformation
 // can use array keyword or symbol

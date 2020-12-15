@@ -22,12 +22,12 @@ $api = $cloudinary->adminApi();
 //   'unsigned'          => true,
 //   'tags'              => 'unsigned',
 //   'allowed_formats'   => 'jpg,png',
-// ]),JSON_PRETTY_PRINT) . "\n";
+// ]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 
 // Use unsigned preset in upload
 
 // echo json_encode($uploader->upload('./assets/logo.png',
-//   ['upload_preset'=>'unsigned-preset']), JSON_PRETTY_PRINT) . "\n";
+//   ['upload_preset'=>'unsigned-preset']), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 
 // Create signed preset
 
@@ -36,10 +36,10 @@ $api = $cloudinary->adminApi();
 //   'unsigned'          => false,
 //   'tags'              => 'signed',
 //   'allowed_formats'   => 'jpg,png',
-// ]),JSON_PRETTY_PRINT) . "\n";
+// ]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 
 // Use signed preset in upload (you can use this in DAM upload)
 // echo json_encode($uploader->upload('./assets/lake.jpg',
 //   ['upload_preset'=>'signed-preset']),
-//   JSON_PRETTY_PRINT) . "\n";
+//   JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ?>

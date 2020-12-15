@@ -1,3 +1,0 @@
-missing closing PHP (fixed)
-File uploaded doesn't match with the rest of the exercise (dog)
-aesthetic-transformations.php:54 (g_south is unnecessary) (deleted)

@@ -67,11 +67,11 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 
 # Improve color, contrast, light
 
-echo ($cloudinary->image('blackberry')
-  ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-  ->effect(Improve::OUTDOOR())
-  ->quality(Quality::auto())
-  ->format(Format::auto()) . "\n");
+// echo ($cloudinary->image('blackberry')
+//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+//   ->effect(Improve::OUTDOOR())
+//   ->quality(Quality::auto())
+//   ->format(Format::auto()) . "\n");
 
 
 # Art filters

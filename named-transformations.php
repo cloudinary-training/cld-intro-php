@@ -28,7 +28,7 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 $api = $cloudinary->adminApi();
 
 # Create a simple named transformation from a string
-// echo json_encode($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'),JSON_PRETTY_PRINT) . "\n";
+// echo json_encode($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 
 # Use named transformation standard
 // echo $cloudinary->image('cheesecake')
@@ -58,7 +58,7 @@ $api = $cloudinary->adminApi();
 // echo ($cloudinary->image('face') -> addTransformation($transformation)) . "\n";
 
 # create a named transformation for duotone
-// echo json_encode($api->createTransformation('duotone',$transformation),JSON_PRETTY_PRINT) . "\n";
+// echo json_encode($api->createTransformation('duotone',$transformation),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 
 # use the named transformation
 //   echo $cloudinary->image('face')

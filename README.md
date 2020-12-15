@@ -160,22 +160,22 @@ $uploader = $cloudinary->uploadApi();
 Upload an image and supply a public id of 20 random characters
 
 ```php
-echo json_encode($uploader->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 ### video
 ```php
-echo json_encode($uploader->upload('./assets/video.mp4',['resource_type'=>'video']),JSON_PRETTY_PRINT). "\n";
+echo json_encode($uploader->upload('./assets/video.mp4',['resource_type'=>'video']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 ```
 
 ### raw
 ```php
-echo json_encode($uploader->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']),JSON_PRETTY_PRINT). "\n";
+echo json_encode($uploader->upload('./assets/BLKCHCRY.TTF',['resource_type'=>'raw']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 ```
 
 ### auto
 ```php
-echo json_encode($uploader->upload('./assets/video.mp4',['resource_type'=>'auto']),JSON_PRETTY_PRINT). "\n";
+echo json_encode($uploader->upload('./assets/video.mp4',['resource_type'=>'auto']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 ```
 
 ### upload options
@@ -186,27 +186,27 @@ print_r($uploader->upload('./assets/face.jpg',['public_id'=>'face']));
 
 #### Use filename, unique
 ```php
-echo json_encode($uploader->upload('./assets/face.jpg',['public_id'=>'face']),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->upload('./assets/face.jpg',['public_id'=>'face']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 ### Use filename, not unique
 ```php
-echo json_encode($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->upload('./assets/cheesecake.jpg',['use_filename'=>true,'unique_filename'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 ### Specify folder name
 ```php
-echo json_encode($uploader->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->upload('./assets/cheesecake.jpg',['folder'=>'food/my_favorite/']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 ### Let Cloudinary create folder on the fly from public id
 ```php
-echo json_encode($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->upload('./assets/dog.jpg',['folder'=>'pets/my_favorite/dog']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 ### Remote asset upload from remote (https)
 ```php
-echo json_encode($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 ## Preset
@@ -237,13 +237,13 @@ echo json_encode($api->createUploadPreset([
   'unsigned'          => true,
   'tags'              => 'unsigned',
   'allowed_formats'   => 'jpg,png',
-]),JSON_PRETTY_PRINT) . "\n";
+]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 #### Use Un-Signed Preset in Upload
 ```php
 echo json_encode($uploader->upload('./assets/logo.png',
-  ['upload_preset'=>'unsigned-preset']), JSON_PRETTY_PRINT) . "\n";
+  ['upload_preset'=>'unsigned-preset']), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 ## Use Un-Signed Preset in web page
 
@@ -263,7 +263,7 @@ echo json_encode($api->createUploadPreset([
   'unsigned'          => false,
   'tags'              => 'signed',
   'allowed_formats'   => 'jpg,png',
-]),JSON_PRETTY_PRINT) . "\n";
+]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 #### Use Signed Preset 
@@ -271,7 +271,7 @@ echo json_encode($api->createUploadPreset([
 ```php
 echo json_encode($uploader->upload('./assets/lake.jpg',
   ['upload_preset'=>'signed-preset']),
-  JSON_PRETTY_PRINT) . "\n";
+  JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 ## Auto-upload and Fetch
@@ -343,25 +343,25 @@ $api = new \Cloudinary\Api();
 
 ### List all assets (default is 10)
 ```php
-echo json_encode($api->resources(),JSON_PRETTY_PRINT) . "/n";
+echo json_encode($api->resources(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "/n";
 ```
 
 ### List up to 500 assets
 ```php
-echo json_encode($api->resources(['max_results'=>500]),JSON_PRETTY_PRINT) . "/n";
+echo json_encode($api->resources(['max_results'=>500]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "/n";
 ```
 
 ###  Search by prefix (public id "starts with")
 ```php
-echo json_encode($api->resources(['type'=>'upload','prefix'=>'sample']),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($api->resources(['type'=>'upload','prefix'=>'sample']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
 ```
 
 ### Rename an asset default overwrite is false
 ### Re-upload cheesecake if needed 
 
 ```php
-echo json_encode($uploader->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT) . "\n";
-echo json_encode($uploader->rename('cheesecake','my_cheesecake',['overwrite'=>true]),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
+echo json_encode($uploader->rename('cheesecake','my_cheesecake',['overwrite'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 ### Remove an asset
@@ -374,8 +374,8 @@ Use `invalide:true` to remove from CDN.  May take some time depending on CDN.  Y
 #### load a file to delete, invalidate is false by default, doesn't remove derived
 
 ```php
-echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT) . "\n";
-echo json_encode($uploader->destroy('lake',['invalidate'=>true]),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
+echo json_encode($uploader->destroy('lake',['invalidate'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 ```
 
 #### Admin API: `delete_resource`
@@ -383,9 +383,9 @@ You can remove multiple assets at a time with the Admin API.  There is a daily q
 
 ```php
 # upload 2 assets and them remove them
-echo json_encode($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']),JSON_PRETTY_PRINT)  . "\n";
-echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT)  . "\n";
-echo json_encode($api->deleteResources(['dog','lake'],['invalidate'=>true]),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
+echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
+echo json_encode($api->deleteResources(['dog','lake'],['invalidate'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
 ```
 
 ### Tag on Upload
@@ -393,31 +393,31 @@ You can supply tags and other metadata like Context on upload.  You can then fin
 
 ```php
  echo json_encode($uploader->upload('./assets/blackberry.jpg',
-    ['public_id'=>'blackberry','tags'=>'fruit,berries']),JSON_PRETTY_PRINT)  . "\n";
- echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
+    ['public_id'=>'blackberry','tags'=>'fruit,berries']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
+ echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
 ```
 
 ### Tag after upload 
 You can add tags to assets that are already in the Media Library.  You can also include an option, `tags:true` to show all tags per asset found in the result.
 
 ```php
-echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT)  . "\n";
-echo json_encode($uploader->addTag('water','lake'),JSON_PRETTY_PRINT)  . "\n";
-echo json_encode($api->resourcesByTag('water',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
+echo json_encode($uploader->addTag('water','lake'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
+echo json_encode($api->resourcesByTag('water',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
 ```
 
 ### Remove a single tag by name; search by removed tag and un-removed tag
 
 ```php
-echo json_encode($uploader->removeTag('berries','blackberry'),JSON_PRETTY_PRINT)  . "\n";
-echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($uploader->removeTag('berries','blackberry'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
+echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
 # other tag still finds resource
-echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
 ```
 ### Remove all tags list of public ids to remove tags
 ```php
-echo json_encode($uploader->removeAllTags('blackberry'),JSON_PRETTY_PRINT)  . "\n";
-echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT)  . "\n";
+echo json_encode($uploader->removeAllTags('blackberry'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
+echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))  . "\n";
 ```
 
 ## Upload for Transformations
@@ -886,7 +886,7 @@ $transformation
 echo ($cloudinary->image('face') -> addTransformation($transformation)) . "\n";
 
 # create a named transformation for duotone
-echo json_encode($api->createTransformation('duotone',$transformation),JSON_PRETTY_PRINT) . "\n";
+echo json_encode($api->createTransformation('duotone',$transformation),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
 
 # use the named transformation
 echo $cloudinary->image('face')
@@ -976,10 +976,10 @@ $api = new AdminApi();
 ### Upload API
 
 ```php
-echo json_encode ,JSON_PRETTY_PRINT). "\n";
-echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). "\n";
+echo json_encode ,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
+echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 or
-echo json_encode($upload->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). "\n";
+echo json_encode($upload->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 
 
 ```
@@ -989,10 +989,10 @@ echo json_encode($upload->upload('./assets/cheesecake.jpg'),JSON_PRETTY_PRINT). 
 Using the Admin API with a singleton.
 
 ```php
-echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT). "\n";
-echo json_encodent_r((new AdminApi())->resource("cheesecake"),JSON_PRETTY_PRINT). "\n";
+echo json_encode((new UploadApi())->upload('./assets/cheesecake.jpg',['public_id'=>'cheesecake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
+echo json_encodent_r((new AdminApi())->resource("cheesecake"),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 or
-echo json_encode($api->resource("cheesecake"),JSON_PRETTY_PRINT). "\n";
+echo json_encode($api->resource("cheesecake"),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)). "\n";
 ```
 
 ### Use Media::fromParams to create a Transformation URL
