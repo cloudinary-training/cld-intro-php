@@ -69,7 +69,7 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 
 // echo ($cloudinary->image('blackberry')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//   ->effect(Improve::OUTDOOR())
+//   ->adjust(Adjust::improve())
 //   ->quality(Quality::auto())
 //   ->format(Format::auto()) . "\n");
 

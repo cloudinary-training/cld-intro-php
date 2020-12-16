@@ -1,7 +1,7 @@
 # Cloudinary Intro using PHP
 
-The Cloudinary PHP SDK is Class based.  This means that your IDE can provide help learning the language.  With Intellisense, you can discover Classes, functions, constants, and enumerated types.
-Here are some suggestions for IDE's that can help with PHP Intellisense:
+The Cloudinary PHP SDK is Class based.  This means that your IDE can provide help learning the language.  With code completion, you can discover Classes, functions, constants, and enumerated types.
+Here are some suggestions for IDE's that can help with PHP code completion and auto import:
 
 * PHP Storm
 * Netbeans
