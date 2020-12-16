@@ -37,8 +37,6 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 # media info shows a 300 x 400 image
 // echo ($cloudinary->image('cheesecake')->resize(Resize::pad()->width(300)->height(400)) . "\n");
 
-# Use crop mode classes need to add use Cloudinary\Transformation\... to pick up the 
-
 # crop: Intro to Gravity
 # using the Crop function and the Resize produce same string
 # no gravity just a chunk of dog fur
@@ -74,13 +72,14 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 // echo ($cloudinary->image('logo')->resize(Resize::thumbnail(100,100)) . "\n");
 
 
+# We use chaining for every action but there is no cost for each transformation
+// echo ($cloudinary->image('cookies')->format(Format::auto()) . "\n");
+
+
 # Compression using quality
 // echo ($cloudinary->image('cookies') . "\n");
 // echo ($cloudinary->image('cookies')->quality(Quality::auto()). "\n");
 
-
-# We use chaining for every action but there is no cost for each transformation
-// echo ($cloudinary->image('cookies')->format(Format::auto()) . "\n");
 
 # Auto everything: quality, format and gravity
 // echo ($cloudinary->image('working')

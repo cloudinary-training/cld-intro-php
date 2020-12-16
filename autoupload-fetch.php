@@ -18,11 +18,11 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 
 // map "remote-media" to "https://cloudinary-training.github.io/cld-advanced-concepts/assets/"
 // Auto-upload Image with cropping
-// echo $cloudinary->image('remote-media/images/dolphin') . "\n";
+// echo $cloudinary->image('remote-media/images/dolphin.jpg') . "\n";
 
 // Auto-upload Video with cropping
-// echo $cloudinary->video('remote-media/video/snowboarding') . "\n";
+// echo $cloudinary->video('remote-media/video/snowboarding.mp4') . "\n";
 
 // Auto-upload Raw no transformations on raw
-// echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
+echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
 ?>
