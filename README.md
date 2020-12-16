@@ -7,7 +7,7 @@ Here are some suggestions for IDE's that can help with PHP Intellisense:
 * Netbeans
 * Aptana Studio
 * Eclipse
-* Visual Studio with Extensions Intelephense or PHP Intellisense
+* Visual Studio with Extensions PHP Namespace Resolver and Intelephense
 * ZendStudio
 
 You can also browse the [Namespace Reference](https://cloudinary.com/documentation/sdks/php/index) to better understand the SDK's structure.
