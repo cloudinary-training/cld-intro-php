@@ -102,9 +102,8 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 
 // echo ($cloudinary->image('lake')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//   ->effect(ArtisticFilter::zorro())
-//   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
+//   ->effect(Effect::artisticFilter(ArtisticFilter::zorro()))
+//   . "\n");
 
 # cartoonify
 # use Cloudinary\Transformation\MiscEffectTrait;
