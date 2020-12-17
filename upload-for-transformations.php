@@ -21,7 +21,7 @@ echo $uploader->upload('./assets/faces.jpg',['public_id'=>'faces'])["public_id"]
 echo $uploader->upload('./assets/grapes.png',['public_id'=>'grapes'])["public_id"] . "\n";
 echo $uploader->upload('./assets/lake.jpg',['public_id'=>'lake'])["public_id"] . "\n";
 echo $uploader->upload('./assets/logo.png',['public_id'=>'logo'])["public_id"] . "\n";
-echo $uploader->upload('./assets/video.mp4',['public_id'=>'video','resource_type'=>'raw'])["public_id"] . "\n";
+echo $uploader->upload('./assets/video.mp4',['public_id'=>'video','resource_type'=>'video'])["public_id"] . "\n";
 echo $uploader->upload('./assets/shirt_only.png',['public_id'=>'shirt_only'])["public_id"] . "\n";
 echo $uploader->upload('./assets/cookies.jpg',['public_id'=>'cookies'])["public_id"] . "\n";
 echo $uploader->upload('./assets/working.jpg',['public_id'=>'working'])["public_id"] . "\n";
