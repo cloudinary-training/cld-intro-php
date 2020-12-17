@@ -28,7 +28,7 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 $api = $cloudinary->adminApi();
 
 # Create a simple named transformation from a string
-// echo json_encode($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
+// echo json_encode($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 
 # Use named transformation standard
 // echo $cloudinary->image('cheesecake')
@@ -58,11 +58,11 @@ $api = $cloudinary->adminApi();
 // echo ($cloudinary->image('face') -> addTransformation($transformation)) . "\n";
 
 # create a named transformation for duotone
-// echo json_encode($api->createTransformation('duotone',$transformation),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) . "\n";
+// echo json_encode($api->createTransformation('duotone',$transformation),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 
 # use the named transformation
-//   echo $cloudinary->image('face')
-// ->namedTransformation('duotone') . "\n";
+// echo $cloudinary->image('face')
+//     ->namedTransformation('duotone') . "\n";
 
 
 # here's a complex transformation
@@ -87,7 +87,7 @@ $api = $cloudinary->adminApi();
 //    )  . "\n";
 
 # create a named transformation for the complex transformation
-// echo json_encode($api->createTransformation('tshirt4',
+// echo json_encode($api->createTransformation('tshirt',
 // 'l_logo/c_scale,w_300/e_brightness:-21/r_max/fl_layer_apply,g_center,x_-10,y_-200/l_text:Coustard_100_bold:Hello Jon/c_scale,w_365/o_70/co_rgb:999999,e_colorize/fl_layer_apply,g_center,x_-10/f_auto')) . "\n";
 
 # using named transform with f_auto: chain

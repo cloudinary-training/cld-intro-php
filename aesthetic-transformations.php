@@ -65,6 +65,29 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 //   ->format(Format::png()) . "\n");
 
 
+# tint
+// echo ($cloudinary->image('face')
+//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+//   ->adjust(Adjust::tint(40, Color::MAGENTA))
+//   ->quality(Quality::auto())
+//   ->format(Format::auto()) . "\n");
+
+# grayscale
+// echo ($cloudinary->image('face')
+//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+//   ->effect(Effect::grayscale())
+//   ->quality(Quality::auto())
+//   ->format(Format::auto()) . "\n");
+
+# duotone = grayscale + tint in chained transformation
+# experiment with color and amount
+// echo ($cloudinary->image('face')
+//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+//   ->effect(Effect::grayscale())
+//   ->adjust(Adjust::tint(20, Color::MAGENTA))
+//   ->quality(Quality::auto())
+//   ->format(Format::auto()) . "\n");
+
 # Improve color, contrast, light
 
 // echo ($cloudinary->image('blackberry')
@@ -98,30 +121,6 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 // -> effect(Effect::outline(100) -> color(Color::orange()))
 // -> background(Color::lightblue())
 // -> resize(Resize::scale() -> height(300)) . "\n";
-
-
-# grayscale
-// echo ($cloudinary->image('face')
-//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//   ->effect(Effect::grayscale())
-//   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
-
-# tint
-// echo ($cloudinary->image('face')
-//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//   ->adjust(Adjust::tint(40, Color::MAGENTA))
-//   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
-
-# duotone = grayscale + tint in chained transformation
-# experiment with color and amount
-// echo ($cloudinary->image('face')
-//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//   ->effect(Effect::grayscale())
-//   ->adjust(Adjust::tint(20, Color::MAGENTA))
-//   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
 
 
 # Overlays
