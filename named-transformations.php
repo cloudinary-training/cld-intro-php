@@ -28,7 +28,10 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 $api = $cloudinary->adminApi();
 
 # Create a simple named transformation from a string
-// echo json_encode($api->createTransformation('standard','w_150,h_150,c_thumb,g_auto'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode(
+//   $api->createTransformation("standard8", (new Transformation())->resize(Resize::thumbnail(150, 150, Gravity::auto())))
+// ,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
+
 
 # Use named transformation standard
 // echo $cloudinary->image('cheesecake')
