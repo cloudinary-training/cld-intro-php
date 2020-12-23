@@ -20,6 +20,7 @@ use Cloudinary\Transformation\Cartoonify;
 use Cloudinary\Transformation\Overlay;
 use Cloudinary\Transformation\Source;
 use Cloudinary\Transformation\Position;
+use Cloudinary\Transformation\RoundCorners;
 
 # Config
 
@@ -30,27 +31,26 @@ $cloudinary = new Cloudinary();
 echo $cloudinary->configuration->account->cloudName  . "\n";
 
 
-# Radius - generate a cirucle for 1:1 aspect ratio and png format
+# Radius - generate a circle for 1:1 aspect ratio and png format
 
-// echo $cloudinary->image('dog')
+// echo $cloudinary->image('dog.png')
 //   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
 //   ->roundCorners(CornerRadius::max())
-//   ->format(Format::png())
 //   ->quality(Quality::auto()) . "\n";
 
 # Borders
-# '10px_solid_rgb:bde4fb'
-// echo ($cloudinary->image('blackberry')
-//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//   ->border(Border::solid()->width(10)->color(Color::rgb('#bde4fb')))
-//   ->format(Format::png())
-//   ->quality(Quality::auto()) . "\n");
+// $cloudinary->image('blackberry')
+//     ->resize(Resize::thumbnail(300, 300, Gravity::auto()))
+//     ->roundCorners(RoundCorners::max()
+//         ->addParameter(Border::solid()->width(10)->color(Color::rgb('#bde4fb'))))
+//     ->format(Format::png())
+//     ->quality(Quality::auto();
 
 # Background for padding
 # can't use gravity auto with pad but you can direct the location of the padding
 
 // echo ($cloudinary->image('face')
-//   ->resize(Resize::pad(300,200,Background::auto())
+//   ->resize(Resize::pad(300,200,Background::auto()))
 //   ->border(Border::solid()->width(10)->color(Color::WHITE))
 //   ->quality(Quality::auto())
 //   ->format(Format::auto()) . "\n");
@@ -90,11 +90,17 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 
 # Improve color, contrast, light
 
-// echo ($cloudinary->image('blackberry')
-//   ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//   ->adjust(Adjust::improve())
-//   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
+//  echo ($cloudinary->image('blackberry')
+//    ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+//    ->adjust(Adjust::improve())
+//    ->quality(Quality::auto())
+//    ->format(Format::auto()) . "\n");
+
+// echo ($cloudinary->image('living-room')
+//    ->resize(Resize::thumbnail(300,300,Gravity::auto()))
+//    ->adjust(Adjust::improve(30)->mode(Improve::INDOOR))
+//    ->quality(Quality::auto())
+//    ->format(Format::auto()) . "\n");
 
 
 # Art filters

@@ -25,4 +25,5 @@ echo $uploader->upload('./assets/video.mp4',['public_id'=>'video','resource_type
 echo $uploader->upload('./assets/shirt_only.png',['public_id'=>'shirt_only'])["public_id"] . "\n";
 echo $uploader->upload('./assets/cookies.jpg',['public_id'=>'cookies'])["public_id"] . "\n";
 echo $uploader->upload('./assets/working.jpg',['public_id'=>'working'])["public_id"] . "\n";
+echo $uploader->upload('./assets/living-room.webp',['public_id'=>'living-room'])["public_id"] . "\n";
 ?>
