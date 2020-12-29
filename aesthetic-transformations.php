@@ -39,12 +39,12 @@ echo $cloudinary->configuration->account->cloudName  . "\n";
 //   ->quality(Quality::auto()) . "\n";
 
 # Borders
-// $cloudinary->image('blackberry')
+// echo $cloudinary->image('blackberry')
 //     ->resize(Resize::thumbnail(300, 300, Gravity::auto()))
 //     ->roundCorners(RoundCorners::max()
 //         ->addParameter(Border::solid()->width(10)->color(Color::rgb('#bde4fb'))))
 //     ->format(Format::png())
-//     ->quality(Quality::auto();
+//     ->quality(Quality::auto())  . "\n";
 
 # Background for padding
 # can't use gravity auto with pad but you can direct the location of the padding
