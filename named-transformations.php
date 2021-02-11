@@ -69,25 +69,25 @@ $api = $cloudinary->adminApi();
 
 
 # here's a complex transformation
-// echo $cloudinary->image('shirt_only.png')
-//   ->overlay(
-//     Source::image('logo')
-//       ->resize(Resize::scale(300))
-//       ->adjust(Adjust::brightness(-21))
-//       ->roundCorners(CornerRadius::max()),
-//     Position::center()->x(-10)->y(-200)  
-//   )
-//   ->overlay(
-//     Source::text('Hello Jon')
-//       ->fontFamily('Coustard')
-//       ->fontSize(100)
-//       ->fontWeight(FontWeight::BOLD) 
-//       ->resize(Resize::scale(365))
-//       ->adjust(Adjust::opacity(70))
-//       ->effect(Effect::colorize()->color(Color::rgb('#999999'))
-//   ),
-//     Position::center()->x(-10),
-//    )  . "\n";
+echo $cloudinary->image('shirt_only.png')
+  ->overlay(
+    Source::image('logo')
+      ->resize(Resize::scale(300))
+      ->adjust(Adjust::brightness(-21))
+      ->roundCorners(CornerRadius::max()),
+    Position::center()->x(-10)->y(-200)  
+  )
+  ->overlay(
+    Source::text('Hello Jon')
+      ->fontFamily('Coustard')
+      ->fontSize(100)
+      ->fontWeight(FontWeight::BOLD) 
+      ->resize(Resize::scale(365))
+      ->adjust(Adjust::opacity(70))
+      ->effect(Effect::colorize()->color(Color::rgb('#999999'))
+  ),
+    Position::center()->x(-10),
+   )  . "\n";
 
 # create a named transformation for the complex transformation
 // echo json_encode($api->createTransformation('tshirt',

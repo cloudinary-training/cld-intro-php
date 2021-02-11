@@ -29,13 +29,14 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 // echo ($cloudinary->image('cheesecake')->resize(Resize::scale(300,400)) . "\n");
 // echo ($cloudinary->image('cheesecake')->resize(Resize::scale()->width(300)->height(400)) . "\n");
 
-# fit: applying 2 dimensins without skew
+# fit: applying 2 dimensions without skew
 # media info shows width 300 and height adjusted to prevent skew
 // echo ($cloudinary->image('cheesecake')->resize(Resize::fit()->width(300)->height(400)) . "\n");
 
 # pad: applying 2 dimensions without skew
 # media info shows a 300 x 400 image
 // echo ($cloudinary->image('cheesecake')->resize(Resize::pad()->width(300)->height(400)) . "\n");
+
 
 # crop: Intro to Gravity
 # using the Crop function and the Resize produce same string
@@ -44,6 +45,7 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 
 # crop mode with Gravity using Resize:thumbnail mode
 // echo ($cloudinary->image('dog')->resize(Resize::thumbnail(300,300,Gravity::auto())) . "\n");
+
 
 # crop modes that use gravity: fill, lfill, fill_pad, and thumbnail
 // echo ($cloudinary->image('working')->resize(Resize::fill(400,400,Gravity::auto())) . "\n");
@@ -74,6 +76,7 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 
 # We use chaining for every action but there is no cost for each transformation
 // echo ($cloudinary->image('cookies')->format(Format::auto()) . "\n");
+
 
 
 # Compression using quality

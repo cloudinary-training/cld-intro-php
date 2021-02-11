@@ -4,8 +4,24 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Cloudinary\Cloudinary;
 
 // Config with Constructor
+
+// Provide credentials in script
+// $cloudinary = new Cloudinary(
+//   [
+//       'cloud' => [
+//         'cloud_name' => 'pictures77', 
+//         'api_key' => '326563836554386', 
+//         'api_secret' => 'YSRNq4Q3gkcQ-5kDx-rQ5F-Xi8w'
+//       ],
+//       'url' => [
+//         'secure' => true
+//       ]
+//   ]
+// );
+
+// export credentials
 $cloudinary = new Cloudinary();
-echo $cloudinary->configuration->account->cloudName . "\n";
+// echo $cloudinary->configuration->cloud->cloudName . "\n";
 
 # Reference the upload API
 $uploader = $cloudinary->uploadApi();
@@ -47,4 +63,3 @@ $uploader = $cloudinary->uploadApi();
 
 // Remote asset upload from remote (https)
 // echo json_encode($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
-?>

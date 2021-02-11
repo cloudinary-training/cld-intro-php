@@ -21,7 +21,7 @@ use Cloudinary\Tag\VideoTag;
 
 // or just export CLOUDINARY_URL
 
-// if you want to access account infromation
+// if you want to access account information
 // $config = Configuration::instance();  
 // verify config
 // echo $config->account->cloudName . "\n";
