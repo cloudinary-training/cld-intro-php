@@ -14,14 +14,14 @@ $api = $cloudinary->adminApi();
 
 # List all assets (default is 10)
 
-// echo json_encode($api->resources(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($api->assets(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 
 # List up to 500 assets
-// echo json_encode($api->resources(['max_results'=>500]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($api->assets(['max_results'=>500]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 
 # Search by prefix (public id "starts with")
-// echo json_encode($api->resources(['resource_type'=>'video']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
-// echo json_encode($api->resources(['type'=>'upload','prefix'=>'cheesecake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($api->assets(['resource_type'=>'video']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($api->assets(['type'=>'upload','prefix'=>'cheesecake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 
 # Rename an asset, default overwrite is false
 
@@ -39,31 +39,28 @@ $api = $cloudinary->adminApi();
 
 // echo json_encode($uploader->upload('./assets/dog.jpg',['public_id'=>'dog']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
 // echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
-// echo json_encode($api->deleteResources(['dog','lake'],['invalidate'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
+// echo json_encode($api->deleteAssets(['dog','lake'],['invalidate'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
 
 
 # Tag on Upload
 # by string with comma-separated tags
-//  echo json_encode($uploader->upload('./assets/blackberry.jpg', [
-//         'public_id' => 'blackberry',
-//         'tags'      => 'fruit,'berries'      // also can use array: ['fruit','berries']
-//      ]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
-//  echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
+# You can use comma separated strings or an array of strings  ['fruit','berries']
+// echo json_encode($uploader->upload('./assets/blackberry.jpg', ['public_id' => 'blackberry', 'tags' => 'fruit,berries']), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)  . "\n";
+//  echo json_encode($api->assetsByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
 
 # Tag after Upload
 
 // echo json_encode($uploader->upload('./assets/lake.jpg',['public_id'=>'lake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 // echo json_encode($uploader->addTag('water','lake'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
-// echo json_encode($api->resourcesByTag('water',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($api->assetsByTag('water',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 
 # Remove a single tag by name; search by removed tag and unremoved tag
 
 // echo json_encode($uploader->removeTag('berries','blackberry'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
-// echo json_encode($api->resourcesByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
+// echo json_encode($api->assetsByTag('berries',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
 # other tag still finds resource
-// echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
+// echo json_encode($api->assetsByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
 
 # Remove all tags list of public ids to remove tags
 // echo json_encode($uploader->removeAllTags('blackberry'),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
-// echo json_encode($api->resourcesByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
-?>
+// echo json_encode($api->assetsByTag('fruit',['tags'=>true]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)  . "\n";
