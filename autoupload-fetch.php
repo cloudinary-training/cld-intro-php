@@ -9,7 +9,8 @@ use Cloudinary\Asset;
 
 // Constructor
 $cloudinary = new Cloudinary();
-echo $cloudinary->configuration->account->cloudName . "\n";
+$cloudinary->configuration->url->analytics(false);
+echo $cloudinary->configuration->cloud->cloudName . "\n";
 
 
 // Fetch
@@ -24,5 +25,5 @@ echo $cloudinary->configuration->account->cloudName . "\n";
 // echo $cloudinary->video('remote-media/video/snowboarding.mp4') . "\n";
 
 // Auto-upload Raw no transformations on raw
-echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
+// echo $cloudinary->raw('remote-media/raw/data.json') . "\n";
 ?>
