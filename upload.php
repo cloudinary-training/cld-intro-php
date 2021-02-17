@@ -21,7 +21,8 @@ use Cloudinary\Cloudinary;
 
 // export credentials
 $cloudinary = new Cloudinary();
-// echo $cloudinary->configuration->cloud->cloudName . "\n";
+$cloudinary->configuration->url->analytics(false);
+echo $cloudinary->configuration->cloud->cloudName . "\n";
 
 # Reference the upload API
 $uploader = $cloudinary->uploadApi();
