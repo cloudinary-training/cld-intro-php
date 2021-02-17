@@ -5,8 +5,9 @@ use Cloudinary\Cloudinary;
 
 // Config Constructor
 $cloudinary = new Cloudinary();
-
+$cloudinary->configuration->url->analytics(false);
 echo $cloudinary->configuration->cloud->cloudName  . "\n";
+
 
 # Reference the upload API
 $uploader = $cloudinary->uploadApi();
