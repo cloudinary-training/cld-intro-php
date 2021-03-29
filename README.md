@@ -68,7 +68,7 @@ curl -s https://getcomposer.org/installer | php sudo mv ./composer.phar /usr/loc
 Install Cloudinary via composer
 
 ```bash
-composer require "cloudinary/cloudinary_php"
+composer require "cloudinary/cloudinary_php:^2"
  ```
 
 This will create a `composer.json` and `composer.lock`. 
