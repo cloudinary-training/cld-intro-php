@@ -34,14 +34,14 @@ $uploader = $cloudinary->uploadApi();
 // echo json_encode($uploader->upload('./assets/cheesecake.jpg'), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
 
 // Video
-// echo json_encode($uploader->upload('./assets/video.mp4', ['resource_type' => 'video']), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($uploader->upload('./assets/earth.mp4', ['resource_type' => 'video']), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
 
 // Raw
 // echo json_encode($uploader->upload('./assets/BLKCHCRY.TTF', ['resource_type' => 'raw']), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
 
 
 // auto
-// echo json_encode($uploader->upload('./assets/video.mp4', ['resource_type' => 'auto']), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($uploader->upload('./assets/earth.mp4', ['resource_type' => 'auto']), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
 
 
 // Use filename, unique

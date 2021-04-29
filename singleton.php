@@ -22,9 +22,9 @@ use Cloudinary\Tag\VideoTag;
 // or just export CLOUDINARY_URL
 
 // if you want to access account information
-// $config = Configuration::instance();  
+$config = Configuration::instance();  
 // verify config
-// echo $config->account->cloudName . "\n";
+echo $config->cloud->cloudName . "\n";
 
 
 // use variable reference
@@ -72,27 +72,36 @@ $api = new AdminApi();
 //   ]
 // ]) . "\n");
 
-// echo (VideoThumbnailTag::fromParams("video.jpg", 
+// echo (VideoThumbnailTag::fromParams("earth.jpg", 
 //   [
 //     "start_offset"=>"1", 
 //     "width"=>350, 
 //     "height"=>350,
-//     "border"=>"5px_solid_white", 
-//     "crop"=>"thumb", 
+//     "border"=>"5px_solid_greene", 
+//     "crop"=>"fit", 
 //     "resource_type"=>"video"
 //   ]
 // ) . "\n");
 
-// echo (VideoTag::fromParams("video.jpg", 
+// echo (VideoTag::fromParams("earth.jpg", 
 //   [
 //     "start_offset"=>"1", 
 //     "width"=>350, 
 //     "height"=>350,
-//     "border"=>"5px_solid_white", 
-//     "crop"=>"thumb", 
+//     "border"=>"5px_solid_green", 
+//     "crop"=>"fit", 
 //     "resource_type"=>"video"
 //   ]
 // ) . "\n");
+
+echo (VideoTag::fromParams("earth.jpg", 
+  [
+    "width"=>300, 
+    "height"=>200,
+    "crop"=>"fit", 
+    "resource_type"=>"video"
+  ]
+) . "\n");
 
 // compare to php sdk1
 

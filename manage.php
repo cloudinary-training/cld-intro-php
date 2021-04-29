@@ -20,7 +20,7 @@ $api = $cloudinary->adminApi();
 // echo json_encode($api->assets(['max_results'=>500]),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 
 # Search by prefix (public id "starts with")
-// echo json_encode($api->assets(['resource_type'=>'video']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($api->assets(['resource_type'=>'earth']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 // echo json_encode($api->assets(['type'=>'upload','prefix'=>'cheesecake']),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) . "\n";
 
 # Rename an asset, default overwrite is false

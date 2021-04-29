@@ -213,7 +213,7 @@ $cloudinary->configuration->url->analytics(false);
 
 # Text over video
 
-// echo ($cloudinary->video('video')
+// echo ($cloudinary->video('earth')
 //   ->resize(Resize::scale(300))
 //   ->overlay(
 //     Overlay::VideoSource(VideoSource::text('Earth')
@@ -237,7 +237,7 @@ $cloudinary->configuration->url->analytics(false);
 // use Cloudinary\Transformation\TextStyle;
 
 
-// echo (new VideoTag('video'))
+// echo (new VideoTag('earth'))
 //   ->overlay(Overlay::source(Source::text(' "What we all have in common" ', (new TextStyle('arial', 30)))
 //     ->textColor(Color::YELLOW()))
 //     ->position((new Position())
@@ -249,7 +249,7 @@ $cloudinary->configuration->url->analytics(false);
 
 # Image over Video
 
-// echo ($cloudinary->video('video')
+// echo ($cloudinary->video('earth')
 //   ->resize(Resize::scale(400))
 //   ->overlay(
 //     Overlay::Source(VideoSource::image('logo')
