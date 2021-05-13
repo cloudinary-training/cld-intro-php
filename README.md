@@ -110,7 +110,7 @@ Instantiate Cloudinary
 ```php
 use Cloudinary\Cloudinary;
 $cloudinary = new Cloudinary();
-echo $cloudinary->configuration->account->cloudName;
+echo $cloudinary->configuration->cloud->cloudName;
 ```
 
 **Alternative:** Credentials in Code
@@ -124,19 +124,6 @@ $cloudinary = new Cloudinary('cloudinary://API_KEY:API_SECRET@CLOUD_NAME');
 ```
 
 or  
-
-```php
-use Cloudinary\Cloudinary;
-$cloudinary = new Cloudinary(
-    [
-        'account' => [
-            'cloud_name' => 'CLOUD_NAME',
-            'key'        => 'API_KEY',
-            'secret'     => 'API_SECRET',
-        ],
-    ]
-);
-```
 
 ```php
 $cloudinary = new Cloudinary(
