@@ -235,13 +235,13 @@ $cloudinary->configuration->url->analytics(false);
 //   )
 // ) . "\n";
 
-# from https://cloudinary.com/documentation/video_manipulation_and_delivery#adding_text_overlays
+
 // use Cloudinary\Tag\VideoTag;
 // use Cloudinary\Transformation\VideoTransformation;
 // use Cloudinary\Transformation\Timeline;
 // use Cloudinary\Transformation\TextStyle;
 
-
+// look at generating a video tag (optional)
 // echo (new VideoTag('earth'))
 //   ->overlay(Overlay::source(Source::text(' "What we all have in common" ', (new TextStyle('arial', 30)))
 //     ->textColor(Color::YELLOW()))
@@ -262,7 +262,7 @@ $cloudinary->configuration->url->analytics(false);
 //       ->adjust(Adjust::opacity(30))
 //   )
 //   ->position((new Position())
-//                 ->gravity(Gravity::compass(Compass::northWest()))
+//                 ->gravity(Gravity::compass(Compass::northEast()))
 //                 ->offsetX(10)->offsetY(10))
 //   )
 // ). "\n";
