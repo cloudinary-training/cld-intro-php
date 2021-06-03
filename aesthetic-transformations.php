@@ -71,18 +71,23 @@ $cloudinary->configuration->url->analytics(false);
 
 # add generic using raw transformation
 // echo $cloudinary->image('blackberry')
-//     // ->addTransformation("some new transformation")
 //     ->addTransformation("c_thumb,g_auto,h_300,w_300/bo_10px_solid_rgb:bde4fb,r_max/f_png/q_auto")
 //     ->version(123) . "\n";
 
 
 # Background for padding
-# you don't need gravity with padding because you'll get the whole image
-// echo ($cloudinary->image('face')
+# auto background
+// echo $cloudinary->image('face')
 //   ->resize(Resize::pad(300,200,Background::auto()))
-//   ->border(Border::solid()->width(10)->color(Color::WHITE))
 //   ->quality(Quality::auto())
-//   ->format(Format::auto()) . "\n");
+//   ->format(Format::auto()) . "\n";
+
+# red background
+// echo $cloudinary->image('face')
+//   ->resize(Resize::pad(300,200,Background::color("RED")))
+//   ->quality(Quality::auto())
+//   ->format(Format::auto()) . "\n";
+
 
 # Effect
 # Outline transparent
