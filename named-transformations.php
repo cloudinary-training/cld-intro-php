@@ -9,6 +9,7 @@ use Cloudinary\Transformation\Gravity;
 use Cloudinary\Transformation\ImageTransformation;
 use Cloudinary\Transformation\Resize;
 use Cloudinary\Transformation\Format;
+use Cloudinary\Transformation\Transformation;
 
 # Config
 # Constructor
