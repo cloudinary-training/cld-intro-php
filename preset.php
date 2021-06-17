@@ -20,11 +20,10 @@ $api = $cloudinary->adminApi();
 
 // echo json_encode($api->createUploadPreset(
 //  [
-//   'name'            => 'unsigned-preset1',
+//   'name'            => 'unsigned-preset',
 //   'unsigned'        => true,
 //   'tags'            => 'unsigned',
-//   'allowed_formats' =>
-//   'jpg,png',
+//   'allowed_formats' => ['jpg','png'],
 //  ]),
 //  JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
 // ) . "\n";
@@ -46,7 +45,7 @@ $api = $cloudinary->adminApi();
 //   'name'            => 'signed-preset',
 //   'unsigned'        => false,
 //   'tags'            => 'signed',
-//   'allowed_formats' => 'jpg,png',
+//   'allowed_formats' => ['jpg','png'],
 //  ]
 // ),
 //  JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
@@ -59,5 +58,4 @@ $api = $cloudinary->adminApi();
 //    'upload_preset' => 'signed-preset',
 //   ]
 //  ),
-//  JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
-// ) . "\n";
+//  JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";

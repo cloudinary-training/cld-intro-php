@@ -14,7 +14,7 @@ use Cloudinary\Cloudinary;
 //         'api_secret' => 'API_SECRET'
 //       ],
 //       'url' => [
-//         'secure' => true
+//         'secure' => true //default
 //       ]
 //   ]
 // );
