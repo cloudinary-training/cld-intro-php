@@ -60,7 +60,7 @@ $uploader = $cloudinary->uploadApi();
 
 
 // Let Cloudinary create folder on the fly from public id
-// echo json_encode($uploader->upload('./assets/dog.jpg', ['folder' => 'pets/my_favorite/dog']), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
+// echo json_encode($uploader->upload('./assets/dog.jpg', ['public_id' => 'pets/my_favorite/dog']), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
 
 // Remote asset upload from remote (https)
 // echo json_encode($uploader->upload('https://cdn.pixabay.com/photo/2015/03/26/09/39/cupcakes-690040__480.jpg'), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n";
