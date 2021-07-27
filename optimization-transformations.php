@@ -41,12 +41,14 @@ echo $cloudinary->configuration->cloud->cloudName . "\n";
 # using the Crop function and the Resize produce same string
 # no gravity just a chunk of dog fur
 //echo ($cloudinary->image('dog')->resize(Resize::crop()->width(300)->height(300)) . "\n");
+// crop with gravity focuses on center
+// echo ($cloudinary->image('dog')->resize(Resize::crop(300,300,Gravity::auto())) . "\n");
 
 # crop mode with Gravity using Resize:thumbnail mode
-//echo ($cloudinary->image('dog')->resize(Resize::thumbnail(300,300,Gravity::auto())) . "\n");
+// echo ($cloudinary->image('dog')->resize(Resize::thumbnail(300,300,Gravity::auto())) . "\n");
 
 
-# crop modes that use gravity: fill, lfill, fill_pad, and thumbnail
+# crop modes that use gravity: crop, fill, lfill, fill_pad, and thumbnail
 //echo ($cloudinary->image('working')->resize(Resize::fill(400,400,Gravity::auto())) . "\n");
 
 # fill_pad 
