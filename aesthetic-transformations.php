@@ -183,57 +183,59 @@ $cloudinary->configuration->url->analytics(false);
 # default position is center
 
 // echo ($cloudinary->image('faces')
-//     ->resize(Resize::thumbnail(300, 300, Gravity::faces()))
-//     ->overlay(
-//         Overlay::source(Source::text('Tutoring')
-//             ->fontFamily('Arial')
-//             ->fontSize(30)
-//             ->fontWeight(FontWeight::BOLD) 
-//             ->effect(Effect::colorize()->color(Color::YELLOW))
-//             ->effect(
-//                 Effect::outline(5)->color(Color::ORANGE)
-//             ))
-//             ->position((new Position())
-//                 ->gravity(Gravity::compass(Compass::northWest()))
-//                 ->offsetX(10)->offsetY(10))
-//     )
-//     ->roundCorners(30)
-//     ->format(Format::auto()) . "\n");
+// ->resize(Resize::thumbnail(300,300,Gravity::faces()))
+//   ->overlay(
+//     Source::text('Tutoring')
+//       ->fontFamily('Arial')
+//       ->fontSize(30)
+//       ->fontWeight(FontWeight::BOLD) 
+//       ->effect(Effect::colorize()->color(Color::YELLOW))
+//       ->effect(Effect::outline(5)->color(Color::ORANGE)
+//     ),
+//     Position::northWest()->offsetX(10)->offsetY(10)
+//   )
+//   ->roundCorners(30)
+//   ->format(Format::auto()). "\n");
 
 # Image over image
 // echo ($cloudinary->image('working')
 //     ->resize(Resize::scale(400))
 //     ->overlay(
-//         Overlay::source(
-//             Source::image('logo')
-//                 ->resize(Resize::thumbnail(50, 50))
-//                 ->adjust(Adjust::opacity(50))
-//         )
-//         ->position((new Position())
-//             ->gravity(Gravity::compass(Compass::northEast()))
-//             ->offsetX(10)->offsetY(10))
+//         Source::image('logo')
+//             ->resize(Resize::thumbnail(50, 50))
+//             ->adjust(Adjust::opacity(50)),
+//         Position::northWest()->offsetX(10)->offsetY(10)
 //     )
 // ) . "\n";
 
 
 # Text over video
-
 // echo ($cloudinary->video('earth')
 //   ->resize(Resize::scale(300))
 //   ->overlay(
-//     Overlay::VideoSource(VideoSource::text('Earth')
-//             ->fontFamily('Arial')
-//             ->fontSize(30)
-//             ->fontWeight(FontWeight::BOLD) 
-//             ->effect(Effect::colorize()->color(Color::BLUE))
-//             ->effect(Effect::outline(5) -> color(Color::GREEN)
-//     ))  
-//     ->position((new Position())
-//         ->gravity(Gravity::compass(Compass::northWest()))
-//         ->offsetX(10)->offsetY(10)
-//     )
+//     VideoSource::text('Earth')
+//         ->fontFamily('Arial')
+//         ->fontSize(30)
+//         ->fontWeight(FontWeight::BOLD) 
+//         ->effect(Effect::colorize()->color(Color::BLUE))
+//         ->effect(Effect::outline(5)->color(Color::GREEN)
+//     ),
+//     Position::northWest()->offsetX(10)->offsetY(10)
 //   )
 // ) . "\n";
+
+# Image over video
+// echo ($cloudinary->video('earth')
+//   ->resize(Resize::scale(400))
+//   ->overlay(
+//     Source::image('logo')
+//       ->resize(Resize::thumbnail(50, 50))
+//       ->adjust(Adjust::opacity(30))
+//     ,
+//     Position::northEast()
+//       ->offsetX(10)->offsetY(10)
+//   ));
+
 
 
 // use Cloudinary\Tag\VideoTag;
