@@ -3,13 +3,18 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
 use Cloudinary\Transformation\Adjust;
-use Cloudinary\Transformation\Argument\Color;
 use Cloudinary\Transformation\Effect;
-use Cloudinary\Transformation\Gravity;
-use Cloudinary\Transformation\ImageTransformation;
-use Cloudinary\Transformation\Resize;
 use Cloudinary\Transformation\Format;
+use Cloudinary\Transformation\Resize;
+use Cloudinary\Transformation\Source;
+use Cloudinary\Transformation\Gravity;
+use Cloudinary\Transformation\Overlay;
+use Cloudinary\Transformation\Position;
+use Cloudinary\Transformation\CornerRadius;
+use Cloudinary\Transformation\Argument\Color;
 use Cloudinary\Transformation\Transformation;
+use Cloudinary\Transformation\ImageTransformation;
+use Cloudinary\Transformation\Argument\Text\FontWeight;
 
 # Config
 # Constructor
