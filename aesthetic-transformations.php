@@ -130,7 +130,7 @@ echo $cloudinary->configuration -> cloud -> cloudName . "\n";
 
 // echo ($cloudinary->image('living-room')
 //    ->resize(Resize::thumbnail(300,300,Gravity::auto()))
-//    ->adjust(Adjust::improve(30)->indoor())
+//    ->adjust(Adjust::improve(30))
 //    ->quality(Quality::auto())
 //    ->format(Format::auto()) . "\n");
 
