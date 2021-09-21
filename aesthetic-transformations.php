@@ -33,8 +33,6 @@ use Cloudinary\Transformation\VideoSource;
 $cloudinary = new Cloudinary();
 $cloudinary->configuration->url->analytics(false);
 echo $cloudinary->configuration -> cloud -> cloudName . "\n";
-$cloudinary->configuration->url->analytics(false);
-
 
 
 # Round Corners (think CSS radius) - generate a circle for 1:1 aspect ratio and png format
@@ -45,7 +43,7 @@ $cloudinary->configuration->url->analytics(false);
 //   ->quality(Quality::auto()) . "\n";
 
 # Next 2 sample yield the same transformation
-# with addQualifier - if there was a new qualifier this could give you early access ???? correct ???
+# with addQualifier - if there was a new qualifier this could give you early access
 // echo $cloudinary->image('blackberry')
 //     ->resize(Resize::thumbnail(300, 300, Gravity::auto()))
 //     ->roundCorners(RoundCorners::max()
