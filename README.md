@@ -62,7 +62,7 @@ https://windows.php.net/
 ### Install Composer
 
 ```bash
-curl -s https://getcomposer.org/installer | php sudo mv ./composer.phar /usr/local/bin/composer composer --version
+curl -s https://getcomposer.org/installer | php; sudo mv ./composer.phar /usr/local/bin/composer; composer --version
 ```
 
 ### Composer
