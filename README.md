@@ -49,7 +49,7 @@ We'll be running PHP as command line script in this course.  The code can be mov
 
 #### Mac
 Mac comes with PHP installed.
-To install the latest version of PHP use HomeBrew.  You can [install Homebrew](https://brew.sh/) 
+To install the latest version of PHP use Homebrew.  You can [install Homebrew](https://brew.sh/) 
 
 ```bash
 brew install php
@@ -85,7 +85,7 @@ This will create a `composer.json` and `composer.lock`.
 
 ## Config
 
-There are 2 ways you get an instance of the Cloudinary object, and we'll refer to them as **Constructor** and **Singleton**.  The "Singleton" provides a single instance of a Cloudinary object configured for a single cloud.  It behaves similar to our legacy PHP SDK and is provided to help with migration and the transition from Version 1 to Version 2.  The **Constructor**  allows you to create multiple Cloudinary objects that can reference different clouds.  If you are writing new code you will use the "Constructor".  The scripts used in this training will take advantage of Version 2 functionality by using the **Constructor**. We cover **Singleton** functionality in the Cloudinary PHP SDK Version 2 Migration course.
+There are 2 ways you get an instance of the Cloudinary object, and we'll refer to them as **Constructor** and **Singleton**.  The "Singleton" provides a single instance of a Cloudinary object configured for a single cloud.  It behaves similar to our legacy PHP SDK and is provided to help with migration and the transition from Version 1 to Version 2.  The **Constructor**  allows you to create multiple Cloudinary objects that can reference different clouds.  If you are writing new code you will use the "Constructor".  The scripts used in this training will take advantage of Version 2 functionality by using the **Constructor**. We cover **Singleton** functionality in the Cloudinary PHP SDK Version 2 migration course.
 
 For both methods of instantiation, you can export your Cloudinary URL, which contains your CLOUD_NAME, API_KEY, and API_SECRET to provide your credentials. You can also use the Cloudinary Config function to pass in the values in the CLOUDINARY_URL.  
 
